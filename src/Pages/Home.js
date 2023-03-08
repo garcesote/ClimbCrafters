@@ -1,7 +1,9 @@
-import './App.css';
+import logo from './../logo.svg';
 import axios from 'axios';
+import './../App.css';
 
-function App() {
+
+function Home() {
   const axiosTest = () => {
     console.log("Axios is ok")
     axios.get(`https://jsonplaceholder.typicode.com/users`)
@@ -23,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
