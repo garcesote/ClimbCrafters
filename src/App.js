@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const axiosTest = () => {
+    console.log("Axios is ok")
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => {
+       console.log(res.data)
+      });
+  }
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Welcome to <h1>ClimbCrafters</h1>
-          <p>Here you'll have the oportunity to craft <h2>your climbing walls</h2></p>
+          Here you'll have the oportunity to craft <h2>your climbing walls</h2>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={axiosTest}>Axios test</button>
       </header>
     </div>
   );
