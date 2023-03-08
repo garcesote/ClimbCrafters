@@ -7,7 +7,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome to <h1>ClimbCrafters</h1>
+          <p>Here you'll have the oportunity to craft <h2>your climbing walls</h2></p>
         </p>
         <a
           className="App-link"
