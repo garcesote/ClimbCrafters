@@ -1,5 +1,10 @@
 import './App.css';
 import axios from 'axios';
+import Header from './Components/Header';
+import { Route, Routes } from 'react-router-dom';
+import Home from './Pages/Home';
+import Products from './Pages/Products';
+import Orders from './Pages/Orders';
 
 function App() {
   const axiosTest = () => {
@@ -10,7 +15,7 @@ function App() {
       });
   }
   return (
-    <div className="App">
+    /*<div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,7 +24,15 @@ function App() {
         </p>
         <button onClick={axiosTest}>Axios test</button>
       </header>
-    </div>
+    </div>*/
+    <>
+      <Header/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/products' element={<Products/>}/>
+        <Route path='/orders' element={<Orders/>}/>
+      </Routes>
+    </>
   );
 }
 
