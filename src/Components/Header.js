@@ -1,6 +1,19 @@
+import React from "react";
 import { Container, Image, Nav, Navbar } from "react-bootstrap";
-import logo from '../img/logoCesta.png';
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import AutContext from "../Storage/AutContext";
+import { useContext } from "react";
+
 const Header = () => {
+
+
+    const carrito = useContext(AutContext);
+
+    const carritoHandler = () => {
+        carrito.set(!carrito.carrito);
+        console.log(carrito.carrito);
+    }
+
     return(
         <>
             <Navbar bg="dark" variant="dark">
@@ -12,11 +25,10 @@ const Header = () => {
                         <Nav.Link href="/orders">Orders</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <Image style={{width: '50px'}} src={'https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/logo2.png?alt=media&token=267ced93-bd0e-4044-afca-df66572dd5e7'}></Image>
+                        <AiOutlineShoppingCart color="white" size={'40px'} onClick={carritoHandler}/>
                     </Nav>
                 </Container>
             </Navbar>
-            <br />
         </>
     );
 }

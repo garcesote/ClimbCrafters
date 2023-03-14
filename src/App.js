@@ -5,35 +5,54 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Products from './Pages/Products';
 import Orders from './Pages/Orders';
+import AutContext from './Storage/AutContext';
+import { useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import Carrito from './Components/Carrito';
 
 function App() {
-  const axiosTest = () => {
-    console.log("Axios is ok")
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-      .then(res => {
-       console.log(res.data)
-      });
+
+  const [carrito, setCarrito] = useState(false);
+
+  if(carrito==false){
+    return (
+      <>
+        <AutContext.Provider value={{carrito: carrito, set: setCarrito}}>
+          <Header/>
+          <Container style={{maxWidth: '100%'}} className='border'>
+            <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/products' element={<Products/>}/>
+              <Route path='/orders' element={<Orders/>}/>
+            </Routes>
+          </Container>
+        </AutContext.Provider>
+      </>
+    );
+  }else{
+    return (
+      <>
+        <AutContext.Provider value={{carrito: carrito, set: setCarrito}}>
+          <Header/>
+          <Container style={{maxWidth: '100%'}} className='border'>
+            <Row>
+              <Col sm={9}>
+                <Routes>
+                  <Route path='/' element={<Home/>}/>
+                  <Route path='/products' element={<Products/>}/>
+                  <Route path='/orders' element={<Orders/>}/>
+                </Routes>
+              </Col>
+              <Col sm={3} className='border' style={{height: '100vh'}}>
+                <Carrito></Carrito>
+              </Col>
+            </Row>
+          </Container>
+        </AutContext.Provider>
+      </>
+    );
   }
-  return (
-    /*<div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to <h1>ClimbCrafters</h1>
-          Here you'll have the oportunity to craft <h2>your climbing walls</h2>
-        </p>
-        <button onClick={axiosTest}>Axios test</button>
-      </header>
-    </div>*/
-    <>
-      <Header/>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/products' element={<Products/>}/>
-        <Route path='/orders' element={<Orders/>}/>
-      </Routes>
-    </>
-  );
+  
 }
 
 export default App;
