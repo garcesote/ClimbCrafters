@@ -26,58 +26,36 @@ function App() {
     <>
       <AutContext.Provider value={{ carrito: carrito, set: setCarrito }}>
         <Header />
-        <Container style={{ maxWidth: '100%' }}>
+        <Container style={{ maxWidth: '100%'}}>
           {
             carrito ?
-              <Row>
-                <Col style={{ height: '90vh' }} sm={8}>
+              <Row className='containerFondo'>
+                <Col style={{ height: '90vh' }} sm={9}>
                   <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/products' element={<Products />} />
                     <Route path='/orders' element={<Orders />} />
                   </Routes>
                 </Col>
-                <Col sm={4} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
+                <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
                   <Carrito></Carrito>
                 </Col>
               </Row>
               :
-              <Col style={{ height: '90vh' }}>
-                <Routes>
-                  <Route path='/' element={<Home />} />
-                  <Route path='/products' element={<Products />} />
-                  <Route path='/orders' element={<Orders />} />
-                </Routes>
-              </Col>
+              <Row className='containerFondo'>
+                <Col style={{ height: '90vh' }}>
+                  <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/products' element={<Products />} />
+                    <Route path='/orders' element={<Orders />} />
+                  </Routes>
+                </Col>
+              </Row>
           }
         </Container>
-        {/* {
-              carrito && carritoComponent
-            } */}
       </AutContext.Provider>
     </>
   );
-  // } else {
-  //   return (
-  //     <>
-  //       <AutContext.Provider value={{ carrito: carrito, set: setCarrito }}>
-  //         <Header />
-  //         <Container style={{ maxWidth: '100%' }}>
-  //           <Row>
-  //             <Routes>
-  //               <Route path='/' element={<Home />} />
-  //               <Route path='/products' element={<Products />} />
-  //               <Route path='/orders' element={<Orders />} />
-  //             </Routes>
-  //             <Col style={{ height: '90vh', width: '40vw', backgroundColor: 'lightgrey', position:'fixed', right:'0px' }}>
-  //               <Carrito></Carrito>
-  //             </Col>
-  //           </Row>
-  //         </Container>
-  //       </AutContext.Provider>
-  //     </>
-  //   );
-  // }
 
 }
 

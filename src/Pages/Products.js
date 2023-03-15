@@ -58,17 +58,9 @@ const Products = () => {
     }
 
     return(
-<<<<<<< HEAD
-        <Container style={{maxWidth: '100%', minHeight: '100%'}} className='border'>
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        
-        </Container>
-
-=======
         <>
             {contenido}
         </>
->>>>>>> b26610b53a18fbd3eb59a6218dc90ec3421d73b3
     )
 }
 
