@@ -20,9 +20,9 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand href="/">ClimbCrafters</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/products">Products</Nav.Link>
-                        <Nav.Link href="/orders">Orders</Nav.Link>
+                        <Nav.Link href="/">DAVID</Nav.Link>
+                        <Nav.Link href="/products">COME</Nav.Link>
+                        <Nav.Link href="/orders">PITO</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
                         <AiOutlineShoppingCart color="white" size={'40px'} onClick={carritoHandler}/>
