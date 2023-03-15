@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Container } from 'react-bootstrap';
 
 
 const Products = () => {
@@ -30,9 +31,11 @@ const Products = () => {
     },[])
 
     return(
-        <>
+        <Container style={{maxWidth: '100%', minHeight: '100%'}} className='border'>
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        
+        </Container>
 
-        </>
     )
 }
 

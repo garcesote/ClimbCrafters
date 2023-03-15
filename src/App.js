@@ -14,45 +14,71 @@ function App() {
 
   const [carrito, setCarrito] = useState(false);
 
-  if(carrito==false){
-    return (
-      <>
-        <AutContext.Provider value={{carrito: carrito, set: setCarrito}}>
-          <Header/>
-          <Container style={{maxWidth: '100%'}} className='border'>
-            <Routes>
-              <Route path='/' element={<Home/>}/>
-              <Route path='/products' element={<Products/>}/>
-              <Route path='/orders' element={<Orders/>}/>
-            </Routes>
-          </Container>
-        </AutContext.Provider>
-      </>
-    );
-  }else{
-    return (
-      <>
-        <AutContext.Provider value={{carrito: carrito, set: setCarrito}}>
-          <Header/>
-          <Container style={{maxWidth: '100%'}} className='border'>
-            <Row>
-              <Col sm={9}>
+  const carritoComponent = (
+    <Col style={{ height: '90vh', width: '40vw', backgroundColor: 'lightgrey', position: 'fixed', right: '0px' }}>
+      <Carrito></Carrito>
+    </Col>
+  )
+
+
+  // if (carrito == false) {
+  return (
+    <>
+      <AutContext.Provider value={{ carrito: carrito, set: setCarrito }}>
+        <Header />
+        <Container style={{ maxWidth: '100%' }}>
+          {
+            carrito ?
+              <Row>
+                <Col style={{ height: '90vh' }} sm={8}>
+                  <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/products' element={<Products />} />
+                    <Route path='/orders' element={<Orders />} />
+                  </Routes>
+                </Col>
+                <Col sm={4} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
+                  <Carrito></Carrito>
+                </Col>
+              </Row>
+              :
+              <Col style={{ height: '90vh' }}>
                 <Routes>
-                  <Route path='/' element={<Home/>}/>
-                  <Route path='/products' element={<Products/>}/>
-                  <Route path='/orders' element={<Orders/>}/>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/products' element={<Products />} />
+                  <Route path='/orders' element={<Orders />} />
                 </Routes>
               </Col>
-              <Col sm={3} className='border' style={{height: '100vh'}}>
-                <Carrito></Carrito>
-              </Col>
-            </Row>
-          </Container>
-        </AutContext.Provider>
-      </>
-    );
-  }
-  
+          }
+        </Container>
+        {/* {
+              carrito && carritoComponent
+            } */}
+      </AutContext.Provider>
+    </>
+  );
+  // } else {
+  //   return (
+  //     <>
+  //       <AutContext.Provider value={{ carrito: carrito, set: setCarrito }}>
+  //         <Header />
+  //         <Container style={{ maxWidth: '100%' }}>
+  //           <Row>
+  //             <Routes>
+  //               <Route path='/' element={<Home />} />
+  //               <Route path='/products' element={<Products />} />
+  //               <Route path='/orders' element={<Orders />} />
+  //             </Routes>
+  //             <Col style={{ height: '90vh', width: '40vw', backgroundColor: 'lightgrey', position:'fixed', right:'0px' }}>
+  //               <Carrito></Carrito>
+  //             </Col>
+  //           </Row>
+  //         </Container>
+  //       </AutContext.Provider>
+  //     </>
+  //   );
+  // }
+
 }
 
 export default App;

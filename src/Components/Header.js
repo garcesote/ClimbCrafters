@@ -16,16 +16,16 @@ const Header = () => {
 
     return(
         <>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" style={{ height: '10vh'}}>
                 <Container>
                     <Navbar.Brand href="/">ClimbCrafters</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">DAVID</Nav.Link>
-                        <Nav.Link href="/products">COME</Nav.Link>
-                        <Nav.Link href="/orders">PITO</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/products">Products</Nav.Link>
+                        <Nav.Link href="/orders">Orders</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <AiOutlineShoppingCart color="white" size={'40px'} onClick={carritoHandler}/>
+                        <AiOutlineShoppingCart color="white" size={'30px'} onClick={carritoHandler}/>
                     </Nav>
                 </Container>
             </Navbar>
