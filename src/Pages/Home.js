@@ -21,8 +21,8 @@ function Home() {
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3>HOla slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <h3>Hola slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -31,7 +31,6 @@ function Home() {
                     src="https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/tecladoASMR.jpg?alt=media&token=3c33d996-77a7-4705-a22c-1c3ea6a1d754"
                     alt="Second slide"
                 />
-
                 <Carousel.Caption>
                     <h3>Second slide label</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
