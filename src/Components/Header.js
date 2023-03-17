@@ -3,6 +3,7 @@ import { Container, Image, Nav, Navbar } from "react-bootstrap";
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import AutContext from "../Storage/AutContext";
 import { useContext } from "react";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -20,9 +21,9 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand href="/">ClimbCrafters</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/products">Products</Nav.Link>
-                        <Nav.Link href="/orders">Orders</Nav.Link>
+                        <Link to="/">Home</Link>
+                        <Link to="/products">Products</Link>
+                        <Link to="/orders">Orders</Link>
                     </Nav>
                     <Nav className="ms-auto">
                         <AiOutlineShoppingCart color="white" size={'30px'} onClick={carritoHandler}/>

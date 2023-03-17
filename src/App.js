@@ -9,7 +9,7 @@ import AutContext from './Storage/AutContext';
 import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Carrito from './Components/Carrito';
-
+import Login from './Pages/Login';
 function App() {
 
   const [carrito, setCarrito] = useState(false);
@@ -35,6 +35,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/products' element={<Products />} />
                     <Route path='/orders' element={<Orders />} />
+                    <Route path='/login' element={<Login />} />
                   </Routes>
                 </Col>
                 <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
@@ -48,6 +49,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/products' element={<Products />} />
                     <Route path='/orders' element={<Orders />} />
+                    <Route path='/login' element={<Login />} />
                   </Routes>
                 </Col>
               </Row>
