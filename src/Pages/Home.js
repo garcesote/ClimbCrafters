@@ -2,6 +2,7 @@
 import styles from './Home.css';
 import './Home.css'
 import { Carousel, Image, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 function Home() {
@@ -47,7 +48,7 @@ function Home() {
                 </Carousel.Item>
             </Carousel>
             <Button variant="primary" size="lg">
-                Login
+                <Link to="/login" style={{color:"white"}}>Login</Link>
             </Button>
 
         </>
