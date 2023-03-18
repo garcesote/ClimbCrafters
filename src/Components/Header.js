@@ -1,33 +1,58 @@
-import React from "react";
-import { Container, Image, Nav, Navbar } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Container, Image, Nav, Navbar, Button } from "react-bootstrap";
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import AutContext from "../Storage/AutContext";
+import LoginContext from '../Storage/LoginContext';
 import { useContext } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const Header = () => {
 
-
     const carrito = useContext(AutContext);
+    const loginContext = useContext(LoginContext);
 
     const carritoHandler = () => {
         carrito.set(!carrito.carrito);
         console.log(carrito.carrito);
     }
+    const logout = () => {
+        loginContext.setLogin(false);
+        loginContext.setLoginData("");
+    }
 
-    return(
+    useEffect(() => {
+        console.log("Header mounted")
+    }, [])
+
+    return (
         <>
-            <Navbar bg="dark" variant="dark" style={{ height: '10vh'}}>
+            <Navbar bg="dark" variant="dark" style={{ height: '10vh' }}>
                 <Container>
-                    <Navbar.Brand href="/">ClimbCrafters</Navbar.Brand>
+                    <Navbar.Brand>
+                        <Link to="/" style={{ color: "white", textDecoration: "none", marginRight: "2vw" }}>ClimbCrafters</Link>
+                    </Navbar.Brand>
                     <Nav className="me-auto">
                         <Link to="/" style={{ color: "white", textDecoration: "none", marginRight: "2vw" }}>Home</Link>
-                        <Link to="/products" style={{ color: "white", textDecoration: "none", marginRight: "2vw"}}>Products</Link>
+                        <Link to="/products" style={{ color: "white", textDecoration: "none", marginRight: "2vw" }}>Products</Link>
                         <Link to="/orders" style={{ color: "white", textDecoration: "none", marginRight: "2vw" }}>Orders</Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <AiOutlineShoppingCart color="white" size={'30px'} onClick={carritoHandler}/>
+                        {
+                            loginContext.login ?
+                                <>
+                                    <AiOutlineShoppingCart color="white" size={'30px'} onClick={carritoHandler} />
+
+                                    <Button variant="secondary" size="lg">
+                                        <Link to="/" style={{ color: "white", textDecoration: "none" }} onClick={logout}>Logout</Link>
+                                    </Button>
+                                </>
+                                :
+                                <Button variant="secondary" size="lg">
+                                    <Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link>
+                                </Button>
+                        }
                     </Nav>
+
                 </Container>
             </Navbar>
         </>

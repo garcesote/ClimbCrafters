@@ -1,11 +1,15 @@
 // import axios from 'axios';
+import React, { useContext } from 'react';
 import styles from './Home.css';
 import './Home.css'
 import { Carousel, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import LoginContext from '../Storage/LoginContext';
 
 
 function Home() {
+
+    const loginContext = useContext(LoginContext);
 
     return (
         <>
@@ -47,10 +51,6 @@ function Home() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <Button variant="primary" size="lg">
-                <Link to="/login" style={{color:"white"}}>Login</Link>
-            </Button>
-
         </>
     );
 }
