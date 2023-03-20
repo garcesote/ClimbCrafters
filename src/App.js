@@ -33,23 +33,17 @@ function App() {
     console.log(localIdToken)
     if (localIdToken) {
       console.log("Session detected, trying to login automatically...")
-      console.log(localIdToken)
 
       // Buscar en la BBDD un idToken igual al que hay guardado en el localStorage de la web
       axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
         .then((response) => {
-          console.log(response)
           const loggedUser = Object.values(response.data).filter((user) => {
             if (user !== null) {
-
               if (user.idToken !== null && user.idToken) {
-            console.log(user)
-
                 return user.idToken === localIdToken
               }
             }
           })
-          console.log(loggedUser)
           // Se ha detectado una sesión
           if (loggedUser != '') {
             setLogin(true);

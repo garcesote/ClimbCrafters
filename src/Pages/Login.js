@@ -14,13 +14,14 @@ function Login() {
     const [password, setPassword] = useState("");
     const loginContext = useContext(LoginContext);
     const navigate = useNavigate();
+    const [loginError, setLoginError] = useState(false);
 
     const authData = {
         email: email,
         password: password,
         returnSecureToken: true
     }
-    
+
     const emailHandler = (event) => {
         setEmail(event.target.value);
     }
@@ -37,10 +38,9 @@ function Login() {
             .then((response) => {
                 console.log(response);
                 if (response.data.registered) {
-                    
                     loginContext.setLogin(true)
                     localStorage.setItem("idToken", response.data.idToken)
-                    
+
                     const newTokenId = {
                         idToken: response.data.idToken
                     }
@@ -55,12 +55,13 @@ function Login() {
                     navigate('/products')
                 }
             }).catch((error) => {
+                setLoginError(true);
                 console.log(error)
             })
-        
+
 
     }
-    
+
     return (
         <>
             <div>
@@ -79,7 +80,7 @@ function Login() {
                                                     <Form.Label className="text-center">
                                                         Email address
                         </Form.Label>
-                                                    <Form.Control type="email" placeholder="Enter email" onChange={emailHandler}/>
+                                                    <Form.Control type="email" placeholder="Enter email" onChange={emailHandler} />
                                                 </Form.Group>
 
                                                 <Form.Group
@@ -90,6 +91,11 @@ function Login() {
                                                     <Form.Control type="password" placeholder="Password" onChange={passwordHandler} />
                                                 </Form.Group>
                                                 <br></br>
+                                                {
+                                                    loginError &&
+                                                    <p style={{ color: "red" }}>Login error, please try again...</p>
+
+                                                }
                                                 <div className="d-grid">
                                                     <Button variant="primary" type="submit">
                                                         Login
@@ -103,15 +109,15 @@ function Login() {
                                                         Sign Up
                                                     </Link>
                                                 </p>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </Card.Body>
                             </Card>
                         </Col>
                     </Row>
                 </Container>
-        </div>
+            </div>
 
         </>
     );
