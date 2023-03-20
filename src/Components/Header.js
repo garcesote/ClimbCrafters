@@ -5,6 +5,7 @@ import AutContext from "../Storage/AutContext";
 import LoginContext from '../Storage/LoginContext';
 import { useContext } from "react";
 import { Link, Navigate } from 'react-router-dom';
+import axios from "axios";
 
 const Header = () => {
 
@@ -18,10 +19,40 @@ const Header = () => {
     const logout = () => {
         loginContext.setLogin(false);
         loginContext.setLoginData("");
+        localStorage.removeItem("idToken");
     }
 
     useEffect(() => {
-        console.log("Header mounted")
+        const localIdToken = localStorage.getItem("idToken");
+        if(localIdToken) {
+            console.log("Session detected")
+            console.log(localIdToken)
+
+            axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+            .then((response) => {
+               const loggedUser = response.data.filter((user) => {
+                    if(user !== null) {
+                        if(user.idToken !== null && user.idToken) {
+                            return user.idToken === localIdToken
+                        }
+                    }
+               })
+
+               if(loggedUser != '') {
+                loginContext.setLogin(true);
+                console.log("sesión iniciada")
+               }
+                // console.log(loggedUser)
+            }).catch((error) => {
+                console.log(error)
+            })
+
+        // console.log("Header mounted")
+        }
+        else {
+            console.log("No session detected")
+        }
+        
     }, [])
 
     return (

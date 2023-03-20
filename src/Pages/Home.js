@@ -13,7 +13,7 @@ function Home() {
 
     return (
         <>
-            <Carousel className='mt-4 text-center' class='carousel'>
+            <Carousel className='mt-4 text-center carousel'>
                 <Carousel.Item className='justify-content-md-center'>
                     <Image
                         className="d-block w-80"
@@ -22,8 +22,8 @@ function Home() {
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <h3 class='carouselText'>Reinventing climbing</h3>
-                        <p class='carouselText'>Climbing has never reach this perfection</p>
+                        <h3 className='carouselText'>Reinventing climbing</h3>
+                        <p className='carouselText'>Climbing has never reach this perfection</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -33,8 +33,8 @@ function Home() {
                         alt="Second slide"
                     />
                     <Carousel.Caption>
-                        <h3 class='carouselText'>3D printing</h3>
-                        <p class='carouselText'>New Technologies involved in current experiences</p>
+                        <h3 className='carouselText'>3D printing</h3>
+                        <p className='carouselText'>New Technologies involved in current experiences</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -46,8 +46,8 @@ function Home() {
 
                     <Carousel.Caption>
 
-                        <h3 class='carouselText'>Reach your limit</h3>
-                        <p class='carouselText'>Life is made for adventure</p>
+                        <h3 className='carouselText'>Reach your limit</h3>
+                        <p className='carouselText'>Life is made for adventure</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

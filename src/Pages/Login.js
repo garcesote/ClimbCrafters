@@ -24,7 +24,9 @@ function Login() {
             .then((response) => {
                 console.log(response);
                 if (response.data.registered) {
+                    
                     loginContext.setLogin(true)
+                    localStorage.setItem("idToken", response.data.idToken)
                     // axios.put("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+ response.data.email + "/idToken/idToken.json", {idToken: response.data.idToken})
                     //     .then((res) => {
                     //         console.log(res)
