@@ -27,12 +27,18 @@ function Login() {
                     
                     loginContext.setLogin(true)
                     localStorage.setItem("idToken", response.data.idToken)
-                    // axios.put("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+ response.data.email + "/idToken/idToken.json", {idToken: response.data.idToken})
-                    //     .then((res) => {
-                    //         console.log(res)
-                    //     }).catch((err) => {
-                    //         console.log(err)
-                    //     })
+                    
+                    const newTokenId = {
+                        idToken: response.data.idToken
+                    }
+
+                    // Guardar token de inicio de sesión en la base de datos
+                    axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + response.data.email.split('.').join("") + '.json', newTokenId)
+                        .then((response) => {
+                            console.log(response)
+                        }).catch((error) => {
+                            console.log(error)
+                        })
                     navigate('/products')
                 }
             }).catch((error) => {

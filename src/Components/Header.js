@@ -23,6 +23,7 @@ const Header = () => {
     }
 
     useEffect(() => {
+
         const localIdToken = localStorage.getItem("idToken");
         if(localIdToken) {
             console.log("Session detected")
@@ -30,7 +31,8 @@ const Header = () => {
 
             axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
             .then((response) => {
-               const loggedUser = response.data.filter((user) => {
+               const loggedUser = Object.values(response.data).filter((user) => {
+                console.log(user)
                     if(user !== null) {
                         if(user.idToken !== null && user.idToken) {
                             return user.idToken === localIdToken
