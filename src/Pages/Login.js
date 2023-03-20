@@ -15,6 +15,19 @@ function Login() {
     const loginContext = useContext(LoginContext);
     const navigate = useNavigate();
 
+    const authData = {
+        email: email,
+        password: password,
+        returnSecureToken: true
+    }
+    
+    const emailHandler = (event) => {
+        setEmail(event.target.value);
+    }
+    const passwordHandler = (event) => {
+        setPassword(event.target.value);
+    }
+
     const submitHandler = (event) => {
         event.preventDefault();
         console.log(email);
@@ -47,19 +60,7 @@ function Login() {
         
 
     }
-    const emailHandler = (event) => {
-        setEmail(event.target.value);
-    }
-    const passwordHandler = (event) => {
-        setPassword(event.target.value);
-    }
-
-    const authData = {
-        email: email,
-        password: password,
-        returnSecureToken: true
-    }
-
+    
     return (
         <>
             <div>

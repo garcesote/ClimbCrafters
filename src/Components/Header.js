@@ -22,40 +22,40 @@ const Header = () => {
         localStorage.removeItem("idToken");
     }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const localIdToken = localStorage.getItem("idToken");
-        if(localIdToken) {
-            console.log("Session detected")
-            console.log(localIdToken)
+    //     const localIdToken = localStorage.getItem("idToken");
+    //     if(localIdToken) {
+    //         console.log("Session detected")
+    //         console.log(localIdToken)
 
-            axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-            .then((response) => {
-               const loggedUser = Object.values(response.data).filter((user) => {
-                console.log(user)
-                    if(user !== null) {
-                        if(user.idToken !== null && user.idToken) {
-                            return user.idToken === localIdToken
-                        }
-                    }
-               })
+    //         axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+    //         .then((response) => {
+    //            const loggedUser = Object.values(response.data).filter((user) => {
+    //             console.log(user)
+    //                 if(user !== null) {
+    //                     if(user.idToken !== null && user.idToken) {
+    //                         return user.idToken === localIdToken
+    //                     }
+    //                 }
+    //            })
 
-               if(loggedUser != '') {
-                loginContext.setLogin(true);
-                console.log("sesión iniciada")
-               }
-                // console.log(loggedUser)
-            }).catch((error) => {
-                console.log(error)
-            })
+    //            if(loggedUser != '') {
+    //             loginContext.setLogin(true);
+    //             console.log("sesión iniciada")
+    //            }
+    //             // console.log(loggedUser)
+    //         }).catch((error) => {
+    //             console.log(error)
+    //         })
 
-        // console.log("Header mounted")
-        }
-        else {
-            console.log("No session detected")
-        }
+    //     // console.log("Header mounted")
+    //     }
+    //     else {
+    //         console.log("No session detected")
+    //     }
         
-    }, [])
+    // }, [])
 
     return (
         <>
