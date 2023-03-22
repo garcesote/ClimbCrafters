@@ -34,6 +34,7 @@ function Login() {
         console.log(email);
         console.log(password);
 
+        // login
         axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw", authData)
             .then((response) => {
                 console.log(response);

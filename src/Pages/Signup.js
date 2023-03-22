@@ -1,15 +1,20 @@
 // import axios from 'axios';
 import './Home.css'
 import { Button, Form, Card, Row, Col, Container } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
+import loginContext from '../Storage/LoginContext';
+import LoginContext from '../Storage/LoginContext';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [signupError, setSignupError] = useState(false);
+    const [signupError, setSignupError] = useState("");
+    const loginContext = useContext(LoginContext);
+    const navigate = useNavigate();
 
     const emailHandler = (event) => {
         setEmail(event.target.value);
@@ -27,33 +32,64 @@ function Signup() {
         console.log(confirmPassword);
 
         if (password === confirmPassword) {
-            const authData = {
-                email: email,
-                password: password,
-                returnSecureToken: true
-            }
-            const newTokenId = {
-                idToken: ""
-            }
-            // Create Firebase account
-            axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUpWithPassword?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw", authData)
-                .then((res) => {
-                    console.log(res)
-                    // Create DDBB for the user
-                    // axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/test/' + email.split('.').join("") + '.json', newTokenId)
-                    // .then((response) => {
-                    //     console.log(response)
-                    // }).catch((error) => {
-                    //     console.log(error)
-                    // })
-                }).catch((err) => {
-                    console.log(err)
-                })
-           
+            if (password.length >= 6) {
+                const authData = {
+                    email: email,
+                    password: password,
+                    returnSecureToken: true
+                }
+                console.log(authData);
+                const newTokenId = {
+                    idToken: ""
+                }
+                const carrito = {
+                    0: { idProducto: "empty" },
+                }
 
+                // Create Firebase account
+                axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw", authData)
+                    .then((res) => {
+                        console.log("user registered")
+                        console.log(res)
+
+                        loginContext.setLogin(true)
+                        localStorage.setItem("idToken", res.data.idToken)
+
+                        const newTokenId = {
+                            idToken: res.data.idToken
+                        }
+
+                        // Create DDBB for the user and save idToken
+                        axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + email.split('.').join("") + '.json', newTokenId)
+                            .then((response) => {
+                                console.log(response)
+                            }).catch((error) => {
+                                console.log(error)
+                            })
+
+                        // Create carrito for the user
+                        axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + email.split('.').join("") + '/carrito.json', carrito)
+                            .then((response) => {
+                                console.log(response)
+                            }).catch((error) => {
+                                console.log(error)
+                            })
+
+                        navigate('/products')
+
+                    }).catch((err) => {
+                        setSignupError("Something went wrong, try again...");
+                        // console.log(err)
+                    })
+
+
+            } else {
+                setSignupError("Passwords must have 6 characters minimum length");
+            }
         }
+
         else {
-            setSignupError(true);
+            setSignupError("Passwords do not match");
         }
 
 
@@ -98,10 +134,11 @@ function Signup() {
                                                 </Form.Group>
                                                 <br></br>
                                                 {
-                                                    signupError &&
-                                                    <p style={{ color: "red" }}>Passwords do not match</p>
+                                                    signupError !== "" &&
+                                                    <p style={{ color: "red" }}>{signupError}</p>
 
                                                 }
+
                                                 <div className="d-grid">
                                                     <Button variant="primary" type="submit">
                                                         Create account
