@@ -1,9 +1,53 @@
+import { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AutContext from "../Storage/AutContext";
 import './Product.css';
 
 
 const Product = (props) => {
+
+    const carritoContext = useContext(AutContext);
+
+    const carritoData = carritoContext.carritoData;
+
+    const producto = props.producto;
+
+    const addHandler = () => {
+        
+        console.log('Producto: '+producto);
+        let rep = false;
+        carritoData.filter((elemento) => {
+            if(elemento.id===producto.id){
+                producto.cantidad += 1;
+                rep = true;
+            }
+        });
+
+        if(!rep){
+            let productoCarrito = producto;
+            productoCarrito.cantidad = 1;
+            carritoData.push(productoCarrito);
+        }
+        console.log(carritoData);
+    }
+
+    const removeHandler = () => {
+        let rep = false;
+        carritoData.filter((elemento) => {
+            if(elemento.id===producto.id){
+                if(producto.cantidad>0){
+                    producto.cantidad -= 1;
+                    rep = true;
+                }
+            }
+        });
+        if(!rep){
+            alert('No hay cantidad de ese producto');
+        }
+        console.log(carritoData);
+    }
+
 
     return(
         <Container className='m-2 p-2 rounded' style={{backgroundColor:'#CECECE', maxWidth:'250px', height:'auto'}}>
@@ -20,10 +64,10 @@ const Product = (props) => {
             </Row>
             <Row> 
                 <Col>
-                    <Button variant="outline-success">+</Button>
+                    <Button variant="outline-success" onClick={addHandler}>+</Button>
                 </Col>
                 <Col>
-                    <Button variant="outline-danger">-</Button>
+                    <Button variant="outline-danger" onClick={removeHandler}>-</Button>
                 </Col>
             </Row>
         </Container>
