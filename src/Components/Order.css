@@ -1,0 +1,20 @@
+.product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    background-color: lightblue;
+}
+
+.productName {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.productPrice {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
