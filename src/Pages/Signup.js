@@ -28,8 +28,6 @@ function Signup() {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        console.log(password);
-        console.log(confirmPassword);
 
         if (password === confirmPassword) {
             if (password.length >= 6) {
@@ -38,10 +36,7 @@ function Signup() {
                     password: password,
                     returnSecureToken: true
                 }
-                console.log(authData);
-                const newTokenId = {
-                    idToken: ""
-                }
+                
                 const carrito = {
                     0: { idProducto: "empty" },
                 }
@@ -50,36 +45,37 @@ function Signup() {
                 axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw", authData)
                     .then((res) => {
                         console.log("user registered")
-                        console.log(res)
 
                         loginContext.setLogin(true)
                         localStorage.setItem("idToken", res.data.idToken)
+                        loginContext.setEmail(res.data.email.split('.').join(""))
+
 
                         const newTokenId = {
-                            idToken: res.data.idToken
+                            idToken: res.data.idToken,
+                            email: email
                         }
 
                         // Create DDBB for the user and save idToken
                         axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + email.split('.').join("") + '.json', newTokenId)
                             .then((response) => {
-                                console.log(response)
+
                             }).catch((error) => {
-                                console.log(error)
+
                             })
 
                         // Create carrito for the user
                         axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + email.split('.').join("") + '/carrito.json', carrito)
                             .then((response) => {
-                                console.log(response)
+
                             }).catch((error) => {
-                                console.log(error)
+
                             })
 
                         navigate('/products')
 
                     }).catch((err) => {
                         setSignupError("Something went wrong, try again...");
-                        // console.log(err)
                     })
 
 

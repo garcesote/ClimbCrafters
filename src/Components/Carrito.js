@@ -8,12 +8,7 @@ const Carrito = () => {
         <>
 
             <h1>CARRITO</h1>
-            {
-                loginContext.login ?
                 <h2>Mostrar productos carrito</h2>
-                :
-                <h1>Login to see your basket</h1>
-            }
         </>
     )
 }

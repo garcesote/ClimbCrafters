@@ -31,16 +31,16 @@ function Login() {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        console.log(email);
-        console.log(password);
 
         // login
         axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw", authData)
             .then((response) => {
-                console.log(response);
                 if (response.data.registered) {
                     loginContext.setLogin(true)
+                    loginContext.setEmail(response.data.email)
                     localStorage.setItem("idToken", response.data.idToken)
+
+                    // TODO: Crear un modal de Bienvenido de nuevo!
 
                     const newTokenId = {
                         idToken: response.data.idToken
@@ -49,7 +49,7 @@ function Login() {
                     // Guardar token de inicio de sesión en la base de datos
                     axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + response.data.email.split('.').join("") + '.json', newTokenId)
                         .then((response) => {
-                            console.log(response)
+
                         }).catch((error) => {
                             console.log(error)
                         })

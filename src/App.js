@@ -20,6 +20,7 @@ function App() {
   const [login, setLogin] = useState();
   const [loginData, setLoginData] = useState();
   const loginContext = useContext(LoginContext);
+  const [email, setEmail] = useState("");
 
   const carritoComponent = (
     <Col style={{ height: '90vh', width: '40vw', backgroundColor: 'lightgrey', position: 'fixed', right: '0px' }}>
@@ -31,9 +32,7 @@ function App() {
   useEffect(() => {
 
     const localIdToken = localStorage.getItem("idToken");
-    console.log(localIdToken)
     if (localIdToken) {
-      console.log("Session detected, trying to login automatically...")
 
       // Buscar en la BBDD un idToken igual al que hay guardado en el localStorage de la web
       axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
@@ -48,6 +47,7 @@ function App() {
           // Se ha detectado una sesión
           if (loggedUser != '') {
             setLogin(true);
+            setEmail(loggedUser[0].email.split('.').join(""))
             console.log("sesión iniciada")
           }
           // console.log(loggedUser)
@@ -68,7 +68,7 @@ function App() {
   return (
     <>
       <AutContext.Provider value={{ carrito: carrito, set: setCarrito }}>
-        <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData }}>
+        <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData, email: email, setEmail: setEmail }}>
           <Header />
           <Container style={{ maxWidth: '100%' }}>
             {
