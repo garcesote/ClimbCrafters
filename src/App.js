@@ -35,7 +35,11 @@ function App() {
       <Carrito></Carrito>
     </Col>
   )
-
+  
+  /*useEffect(() => {
+    console.log('holaa')
+  },[carrito, carritoData])*/
+  
   // Comprobar si hay una sesión iniciada al abrir el navegador
   useEffect(() => {
 
@@ -71,7 +75,6 @@ function App() {
 
   }, [])
 
-
   // if (carrito == false) {
   return (
     <>
@@ -94,7 +97,7 @@ function App() {
                     </Routes>
                   </Col>
                   <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
-                    <Carrito></Carrito>
+                    <Carrito data={carritoData}></Carrito>
                   </Col>
                 </Row>
                 :

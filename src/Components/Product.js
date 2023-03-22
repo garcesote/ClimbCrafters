@@ -17,7 +17,8 @@ const Product = (props) => {
         
         console.log('Producto: '+producto);
         let rep = false;
-        carritoData.filter((elemento) => {
+        let item = [...carritoData]
+        item.filter((elemento) => {
             if(elemento.id===producto.id){
                 producto.cantidad += 1;
                 rep = true;
@@ -27,15 +28,18 @@ const Product = (props) => {
         if(!rep){
             let productoCarrito = producto;
             productoCarrito.cantidad = 1;
-            carritoData.push(productoCarrito);
+            item.push(productoCarrito);
         }
-        console.log(carritoData);
+        carritoContext.setCarritoData(item);
     }
 
     const removeHandler = () => {
         let rep = false;
-        carritoData.filter((elemento) => {
+        let item = [...carritoData];
+        console.log(producto.id)
+        item.filter((elemento) => {
             if(elemento.id===producto.id){
+                console.log(producto.id)
                 if(producto.cantidad>0){
                     producto.cantidad -= 1;
                     rep = true;
@@ -45,9 +49,11 @@ const Product = (props) => {
         if(!rep){
             alert('No hay cantidad de ese producto');
         }
+
+        carritoContext.setCarritoData(item);
         console.log(carritoData);
     }
-
+    
 
     return(
         <Container className='m-2 p-2 rounded' style={{backgroundColor:'#CECECE', maxWidth:'250px', height:'auto'}}>

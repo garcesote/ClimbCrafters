@@ -14,7 +14,6 @@ const Header = () => {
 
     const carritoHandler = () => {
         carrito.set(!carrito.carrito);
-        console.log(carrito.carrito);
     }
     const logout = () => {
         loginContext.setLogin(false);
@@ -43,7 +42,7 @@ const Header = () => {
                         {
                             loginContext.login ?
                                 <>
-                                    <AiOutlineShoppingCart color="white" size={'30px'} onClick={carritoHandler} />
+                                    <AiOutlineShoppingCart className="m-4" color="white" size={'30px'} onClick={carritoHandler} />
 
                                     <Button variant="secondary" size="lg">
                                         <Link to="/" style={{ color: "white", textDecoration: "none" }} onClick={logout}>Logout</Link>

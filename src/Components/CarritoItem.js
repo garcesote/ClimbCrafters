@@ -1,7 +1,12 @@
-import { Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 const CarritoItem = (props) => {
-    <Row><big><b>Name:</b></big> {props.producto.nombre} <big><b> Cantidad:</b></big> {props.producto.cantidad}</Row>
+    return(
+        <Container className='bg-light rounded m-2'>
+            <p><big><b>{props.producto.nombre}</b></big></p>  
+            <p><b> Cantidad:</b> {props.producto.cantidad}</p>
+        </Container>
+    )
 }
 
 export default CarritoItem;
