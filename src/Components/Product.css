@@ -1,0 +1,16 @@
+.image{
+    margin:auto;
+}
+
+.row{
+    margin:auto;
+    width:100%;
+    margin-top: 2px;
+}
+
+/*.item{
+    width: 150px;
+    height:fit-content;
+    align-items: center;
+    background-color: gray;
+}*/

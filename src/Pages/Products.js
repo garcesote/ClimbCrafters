@@ -10,7 +10,7 @@ const Products = () => {
 
     const axiosTest = () => {
         console.log("Axios is ok")
-        axios.get("https://clase-react-8ce4d-default-rtdb.europe-west1.firebasedatabase.app/producto.json")
+        axios.get("https://clase-react-8ce4d-default-rtdb.europe-west1.firebasedatabase.app/ClimbCrafters.json")
         .then(res => {
             let arrayProductos = [];
             const data = res.data;
@@ -20,7 +20,7 @@ const Products = () => {
                     nombre:data[key].nombre,
                     descripcion:data[key].descripcion,
                     precio:data[key].precio,
-                    fecha:new Date(data[key].fecha)
+                    img: data[key].img,
                 })
             }
             setProducts(arrayProductos);
@@ -45,10 +45,10 @@ const Products = () => {
         contenido = (
             <Row className="text-center">
             {
-                array.map((elemento) => {
+                products.map((elemento) => {
                     return(
                         <Col>
-                            <Product producto={elemento}></Product>
+                            <Product key={elemento} producto={elemento}></Product>
                         </Col>
                     )
                 })
