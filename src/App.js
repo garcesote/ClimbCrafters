@@ -18,6 +18,7 @@ function App() {
 
   const [carrito, setCarrito] = useState(false);
   const [login, setLogin] = useState();
+  const [carritoData, setCarritoData] = useState([]);
   const [loginData, setLoginData] = useState();
   const loginContext = useContext(LoginContext);
   const [email, setEmail] = useState("");
@@ -67,7 +68,7 @@ function App() {
   // if (carrito == false) {
   return (
     <>
-      <AutContext.Provider value={{ carrito: carrito, set: setCarrito }}>
+      <AutContext.Provider value={{ carrito: carrito, set: setCarrito, carritoData: carritoData, setCarritoData: setCarritoData }}>
         <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData, email: email, setEmail: setEmail }}>
           <Header />
           <Container style={{ maxWidth: '100%' }}>
