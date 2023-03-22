@@ -12,6 +12,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Carrito from './Components/Carrito';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
+import DetailProduct from './Pages/DetailProduct';
 
 function App() {
 
@@ -80,6 +81,7 @@ function App() {
                       <Route path='/orders' element={<Orders />} />
                       <Route path='/login' element={<Login />} />
                       <Route path='/signup' element={<Signup />} />
+                      <Route path='/detail-product/:id' element={<DetailProduct />} />
                     </Routes>
                   </Col>
                   <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
@@ -95,6 +97,7 @@ function App() {
                       <Route path='/orders' element={<Orders />} />
                       <Route path='/login' element={<Login />} />
                       <Route path='/signup' element={<Signup />} />
+                      <Route path='/detail-product/:id' element={<DetailProduct />} />
                     </Routes>
                   </Col>
                 </Row>
