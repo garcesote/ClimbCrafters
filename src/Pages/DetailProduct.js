@@ -16,7 +16,7 @@ const DetailProduct = () => {
 
     useEffect(() => {
         
-        fetch("https://clase-react-8ce4d-default-rtdb.europe-west1.firebasedatabase.app/ClimbCrafters/"+id+".json")
+        fetch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/products/"+id+".json")
         .then((response) => response.json())
         .then((data) => {
             setDescription(data.descripcion);
