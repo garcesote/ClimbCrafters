@@ -36,9 +36,10 @@ function App() {
     </Col>
   )
   
-  /*useEffect(() => {
-    console.log('holaa')
-  },[carrito, carritoData])*/
+  //Cargamos el carrito del usuario
+  useEffect( () => {
+    
+  },[])
   
   // Comprobar si hay una sesión iniciada al abrir el navegador
   useEffect(() => {
@@ -65,6 +66,27 @@ function App() {
           // console.log(loggedUser)
         }).catch((error) => {
           console.log(error)
+        }).then( () => {
+          //CARGAMOS EL CARRITO DEL USUARIO
+          axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+email+"/carrito.json")
+          .then(res => {
+              let arrayProductos = [];
+              const data = res.data;
+              for(let key in data){
+                  arrayProductos.push({
+                      id:key,
+                      nombre:data[key].nombre,
+                      descripcion:data[key].descripcion,
+                      precio:data[key].precio,
+                      img: data[key].img,
+                      cantidad: data[key].cantidad
+                  })
+              }
+              console.log(arrayProductos);
+              console.log(email);
+              console.log("HOLAAA");
+              setCarritoData(arrayProductos);
+            });
         })
 
       // console.log("Header mounted")
@@ -74,8 +96,29 @@ function App() {
     }
 
   }, [])
+  
+  /*.then( () => {
+    
+    axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+id+"/carrito.json")
+    .then(res => {
+        let arrayProductos = [];
+        const data = res.data;
+        for(let key in data){
+            arrayProductos.push({
+                id:key,
+                nombre:data[key].nombre,
+                descripcion:data[key].descripcion,
+                precio:data[key].precio,
+                img: data[key].img,
+                cantidad: data[key].cantidad
+            })
+        }
+        console.log(arrayProductos);
+        console.log("HOLAAA");
+        setCarritoData(arrayProductos);
+      });
+  })*/
 
-  // if (carrito == false) {
   return (
     <>
       <AutContext.Provider value={{ carrito: carrito, set: setCarrito, carritoData: carritoData, setCarritoData: setCarritoData }}>

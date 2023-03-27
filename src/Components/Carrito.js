@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -10,8 +11,6 @@ const Carrito = (props) => {
     const loginContext = useContext(LoginContext);
 
     const id = loginContext.email;
-
-    const carritoContext = useContext(AutContext);
     
     let contenido = (
         
