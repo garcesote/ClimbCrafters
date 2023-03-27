@@ -26,7 +26,7 @@ const Confirmation = () => {
                                     <div className="mb-3">
                                         <Order data={carritoOrder}></Order>
                                         <div className="mt-3">
-                                            <Link to="/">
+                                            <Link to="/customer-details">
                                                 <Button variant="primary" type="submit">
                                                     Confirm order
                                                 </Button>
