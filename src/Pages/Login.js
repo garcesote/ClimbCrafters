@@ -59,8 +59,6 @@ function Login() {
                 setLoginError(true);
                 console.log(error)
             })
-
-
     }
 
     return (
