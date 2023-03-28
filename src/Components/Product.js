@@ -40,28 +40,23 @@ const Product = (props) => {
             productoCarrito.cantidad = 1;
             item.push(productoCarrito);
             const id = productoCarrito.id;
-            delete productoCarrito.id;
             axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito.json", {[id]: productoCarrito})
             .then((response) => {
-                alert('Nuevo producto añadido al carrito');
+                console.log('Nuevo producto añadido al carrito');
             });
         }
 
-        console.log('Producto: ');
-        console.log(producto);
         carritoContext.setCarritoData(item);
-        console.log('MAIL: ');
-        console.log(loginContext.email);
+        carritoContext.set(true);
         
     }
 
     const removeHandler = () => {
         let rep = false;
         let item = [...carritoData];
-        console.log(producto.id)
+
         item.filter((elemento) => {
             if(elemento.id===producto.id){
-                console.log(producto.id)
                 if(elemento.cantidad>0){
                     elemento.cantidad -= 1;
                     axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
@@ -69,6 +64,27 @@ const Product = (props) => {
                         console.log('MENOS 1');
                     });
                     rep = true;
+
+                    //ELIMINO EL PRODUCTO DEL CARRITO SI LA CANTIDAD ES CERO
+                    if(elemento.cantidad==0){
+                        //EN LOCAL
+                        const rem_item = item.filter((obj) => {
+                            return obj.id !== elemento.id;
+                        })
+                        carritoContext.setCarritoData(rem_item);
+
+                        //EN LA NUBE
+                        axios.delete("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json")
+                        .then((response) => {
+                            console.log('BORRADO NUBE');
+                        });
+                        
+                    }else{
+                        carritoContext.setCarritoData(item);
+                    }
+
+                    rep = true;
+                    
                 }
             }
         });
@@ -76,15 +92,16 @@ const Product = (props) => {
             alert('No hay cantidad de ese producto');
         }
 
-        carritoContext.setCarritoData(item);
-        console.log(carritoData);
+        
+        carritoContext.set(true);
+
     }
     
 
     return(
         <Container className='m-2 p-2 rounded' style={{backgroundColor:'#CECECE', maxWidth:'250px', height:'auto'}}>
             <Row className='m-1'>
-                <Link to={`/detail-product/${props.producto.id}`}><img src={props.producto.img} width="120px" height="auto"></img></Link>
+                <Link to={`/detail-product/${props.producto.id}`}><img src={props.producto.img} width="180px" height="auto"></img></Link>
             </Row>
             <Row> 
                 <Col sm={9}>
