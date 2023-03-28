@@ -3,7 +3,7 @@ import { Container, Image, Nav, Navbar, Button } from "react-bootstrap";
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import AutContext from "../Storage/AutContext";
 import LoginContext from '../Storage/LoginContext';
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { Link, Navigate } from 'react-router-dom';
 import axios from "axios";
 

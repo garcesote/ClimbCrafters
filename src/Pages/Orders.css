@@ -1,0 +1,14 @@
+.order {
+    color: black;
+    display: flex;
+    background-color: antiquewhite;
+    margin-bottom: 2rem;
+    padding: 1rem
+}
+.order:hover {
+    background-color: burlywood
+}
+.orderDetails {
+    margin-right: 1rem;
+}
+

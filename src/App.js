@@ -62,7 +62,8 @@ function App() {
           if (loggedUser != '') {
             setLogin(true);
             setEmail(loggedUser[0].email.split('.').join(""))
-            console.log("sesión iniciada")
+            console.log("sesión iniciada: " + loggedUser[0].email.split('.').join(""))
+            
           }
           // console.log(loggedUser)
         }).catch((error) => {
@@ -83,9 +84,9 @@ function App() {
                       cantidad: data[key].cantidad
                   })
               }
-              console.log(arrayProductos);
-              console.log(email);
-              console.log("HOLAAA");
+              //console.log(arrayProductos);
+              //console.log(email);
+              //console.log("HOLAAA");
               setCarritoData(arrayProductos);
             });
         })
