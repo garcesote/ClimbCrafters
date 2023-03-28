@@ -15,36 +15,28 @@ const Orders = () => {
     }
 
     // petición a la base de datos para obtener todos los pedidos
-    // useEffect(() => {
-    //     if (loginContext.login === true) {
-    //         axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/" + loginContext.email.split(".").join(" ") + "/pedidos.json")
-    //             .then((response) => {
-    //                 let ordersArray = [];
-    //                 for (let key in response.data) {
-    //                     ordersArray.push({
-    //                         orderId: key,
-    //                         details: response.data[key].details,
-    //                         products: response.data[key].products,
-    //                     })
-    //                     //console.log(key)
-    //                     //console.log(response.data[key].details)
-    //                 }
-    //                 setOrders(ordersArray);
-
-    //             }).catch((error) => {
-    //                 console.log(error)
-    //             })
-    //     }
-
-    // }, [loginContext])
     useEffect(() => {
         if (loginContext.login === true) {
-            console.log(loginContext)
-            console.log("Getting orders");
-        }
-    }, [loginContext])
+            axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/" + loginContext.email + "/pedidos.json")
+                .then((response) => {
+                    console.log(response)
+                    let ordersArray = [];
+                    for (let key in response.data) {
+                        ordersArray.push({
+                            orderId: key,
+                            details: response.data[key].details,
+                            products: response.data[key].products,
+                        })
+                    }
+                    setOrders(ordersArray);
 
-    // console.log(orders);
+                }).catch((error) => {
+                    console.log(error)
+                })
+        }
+
+    }, [loginContext.login])
+    
     return (
         <div>
             {

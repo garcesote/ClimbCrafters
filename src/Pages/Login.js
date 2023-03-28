@@ -37,7 +37,7 @@ function Login() {
             .then((response) => {
                 if (response.data.registered) {
                     loginContext.setLogin(true)
-                    loginContext.setEmail(response.data.email)
+                    loginContext.setEmail(response.data.email.split('.').join(""))
                     localStorage.setItem("idToken", response.data.idToken)
 
                     // TODO: Crear un modal de Bienvenido de nuevo!
