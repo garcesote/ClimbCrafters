@@ -42,6 +42,8 @@ function CustomerDetails() {
                     axios.delete('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + loginContext.email + '/carrito.json')
                         .then((response) => {
                             carrito.setCarritoData([])
+
+                            // TODO: Hacer petición a la BBDD o añadir un nuevo pedido al estado
                         }).catch((error) => {
                             console.log(error)
                         })

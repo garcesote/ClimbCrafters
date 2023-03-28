@@ -9,29 +9,39 @@ import CarritoItem from "./CarritoItem";
 const Carrito = (props) => {
 
     const loginContext = useContext(LoginContext);
-
+    const carritoContext = useContext(AutContext);
     const id = loginContext.email;
-    
+
     let contenido = (
-        
+
         props.data.map((elemento) => {
-            return(
-                    <Row className="text-center">
-                        <CarritoItem key={elemento} producto={elemento}></CarritoItem>
-                    </Row>
+            return (
+                <Row className="text-center">
+                    <CarritoItem key={elemento} producto={elemento}></CarritoItem>
+                </Row>
             )
         })
-        
+
     );
 
     return (
         <>
-            <h5 className="m-4">Contenido carrito:</h5>
-            <Container className='border'>
-                {contenido}
-            </Container>
+            {
+                carritoContext.carritoData.length === 0
 
-            <Link to="/confirmation"><Button variant='primary'>Finalizar compra</Button></Link>
+                    ?
+                    <h5 className="m-4">Empty shopping list</h5>
+
+                    :
+                    <>
+                        <h5 className="m-4">Shopping list</h5>
+                        <Container className='border'>
+                            {contenido}
+                        </Container>
+
+                        <Link to="/confirmation"><Button variant='primary'>Finalizar compra</Button></Link>
+                    </>
+            }
         </>
     )
 }
