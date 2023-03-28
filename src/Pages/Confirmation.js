@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import LoginContext from "../Storage/LoginContext";
 import AutContext from "../Storage/AutContext";
 import { Button, Form, Card, Row, Col, Container } from 'react-bootstrap';
@@ -11,6 +11,9 @@ const Confirmation = () => {
     const loginContext = useContext(LoginContext);
     const carritoOrder = autContext.carritoData;
 
+    useEffect(() => {
+        autContext.set(false);
+    }, [])
 
     return (
         <>

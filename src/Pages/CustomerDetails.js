@@ -24,22 +24,29 @@ function CustomerDetails() {
         setCustomerAddress(event.target.value)
     }
 
-   
+
     const submitHandler = (event) => {
         event.preventDefault();
 
-        if( customerUser.length > 0 && customerAddress.length > 0) {
+        if (customerUser.length > 0 && customerAddress.length > 0) {
             const pedido = {
                 details: { name: customerUser, address: customerAddress },
                 products: carrito.carritoData
             }
-        
+
             // Guardar pedido en la base de datos
             axios.post('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + loginContext.email + '/pedidos.json', pedido)
                 .then((response) => {
 
-                    // TODO: Borrar carrito, tanto del contexto como de la BBDD!!!!!
-                    
+                    // Borrar carrito, tanto del contexto como de la BBDD
+                    axios.delete('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + loginContext.email + '/carrito.json')
+                        .then((response) => {
+                            carrito.setCarritoData([])
+                        }).catch((error) => {
+                            console.log(error)
+                        })
+
+
                 }).catch((error) => {
                     console.log(error)
                 })
