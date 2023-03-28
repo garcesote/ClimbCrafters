@@ -18,7 +18,7 @@ function Home() {
                     <Image
                         className="d-block w-80"
                         style={{ maxHeight: '400px' }}
-                        src="https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-2.jpeg?alt=media&token=8e80bfe5-a437-49b4-bf12-c36f9d3231a2"
+                        src="https://firebasestorage.googleapis.com/v0/b/climbcrafters.appspot.com/o/carousel-2.jpeg?alt=media&token=8b12fe47-e38c-4619-b56e-1911c43685e6"
                         alt="First slide"
                     />
                     <Carousel.Caption>
@@ -29,7 +29,7 @@ function Home() {
                 <Carousel.Item>
                     <img
                         className="d-block w-80"
-                        src="https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-3.jpg?alt=media&token=65f63113-a775-4638-8fe0-2d762846960c"
+                        src="https://firebasestorage.googleapis.com/v0/b/climbcrafters.appspot.com/o/carousel-3.jpg?alt=media&token=73481428-94ac-453a-bca7-691ceb6bb866"
                         alt="Second slide"
                     />
                     <Carousel.Caption>
@@ -40,7 +40,7 @@ function Home() {
                 <Carousel.Item>
                     <img
                         className="d-block w-80"
-                        src="https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-1.jpg?alt=media&token=88f8f1d1-892a-42ed-adfc-b21fbb57f791"
+                        src="https://firebasestorage.googleapis.com/v0/b/climbcrafters.appspot.com/o/carousel-1.jpg?alt=media&token=6b8bb4ce-0288-43af-a5df-54e1dd3c9e52"
                         alt="Third slide"
                     />
 

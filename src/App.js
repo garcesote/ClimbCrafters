@@ -19,13 +19,7 @@ function App() {
 
   const [carrito, setCarrito] = useState(false);
   const [login, setLogin] = useState();
-  const [carritoData, setCarritoData] = useState(
-    [
-      {id: "1", nombre: "Roca gorda", descripcion: "Descripción del productaco", precio: 12, cantidad: 3, img: "https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-2.jpeg?alt=media&token=8e80bfe5-a437-49b4-bf12-c36f9d3231a2"},
-      {id: "2", nombre: "Roquetes", descripcion: "Tocho tocho tochoooooo", precio: 10, cantidad: 2, img: "https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-2.jpeg?alt=media&token=8e80bfe5-a437-49b4-bf12-c36f9d3231a2"},
-      {id: "3", nombre: "Cositas", descripcion: "A mamarla a otro sitio", precio: 5, cantidad: 1, img: "https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-2.jpeg?alt=media&token=8e80bfe5-a437-49b4-bf12-c36f9d3231a2"},
-      {id: "4", nombre: "Muchas rocas", descripcion: "Garcesote guele a pito", precio: 100, cantidad: 1, img: "https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-2.jpeg?alt=media&token=8e80bfe5-a437-49b4-bf12-c36f9d3231a2"}
-    ]);
+  const [carritoData, setCarritoData] = useState([]);
   const [loginData, setLoginData] = useState();
   const loginContext = useContext(LoginContext);
   const [email, setEmail] = useState("");
@@ -36,14 +30,10 @@ function App() {
     </Col>
   )
   
-  //Cargamos el carrito del usuario
-  useEffect( () => {
-    
-  },[])
-  
   // Comprobar si hay una sesión iniciada al abrir el navegador
   useEffect(() => {
 
+    console.log('EEEEIII');
     const localIdToken = localStorage.getItem("idToken");
     if (localIdToken) {
       // Verify the token with Firebase Authentication API
@@ -71,6 +61,8 @@ function App() {
             .then(res => {
                 let arrayProductos = [];
                 const data = res.data;
+                console.log('CARRITO: ');
+                console.log(data);
                 for(let key in data){
                     arrayProductos.push({
                         id:key,
@@ -81,8 +73,6 @@ function App() {
                         cantidad: data[key].cantidad
                     })
                 }
-                console.log(arrayProductos);
-                console.log(email);
                 console.log("HOLAAA");
                 setCarritoData(arrayProductos);
               });

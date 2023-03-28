@@ -26,7 +26,7 @@ const Carrito = (props) => {
 
     return (
         <>
-            <h1>CARRITO</h1>
+            <h5 className="m-4">Contenido carrito:</h5>
             <Container className='border'>
                 {contenido}
             </Container>
