@@ -9,7 +9,7 @@ const Order = ({ data }) => {
     const autContext = useContext(AutContext);
     const loginContext = useContext(LoginContext);
     const [orderPrice, setOrderPrice] = useState(0);
-    console.log(data)
+    //console.log(data)
 
     useEffect(() => {
         let price = 0;

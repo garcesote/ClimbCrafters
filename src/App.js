@@ -36,6 +36,28 @@ function App() {
     console.log('EEEEIII');
     const localIdToken = localStorage.getItem("idToken");
     if (localIdToken) {
+      // TODO: hacer la petición al endpoint de firebase para detectar si el token del storage es válido y de qué usuario es.
+      
+      // Verify the token with Firebase Authentication API
+      // fetch(
+      //   `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`,
+      //   {
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       idToken: localIdToken,
+      //     }),
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   }
+      // )
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //       console.log(data)
+      //     setUser(data.users[0]);
+      //   })
+      //   .catch((error) => console.error(error));
+      
 
       console.log('EEEEIII2');
       // Buscar en la BBDD un idToken igual al que hay guardado en el localStorage de la web

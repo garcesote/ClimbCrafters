@@ -38,6 +38,8 @@ function CustomerDetails() {
             axios.post('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + loginContext.email + '/pedidos.json', pedido)
                 .then((response) => {
 
+                    // TODO: Borrar carrito, tanto del contexto como de la BBDD!!!!!
+                    
                 }).catch((error) => {
                     console.log(error)
                 })
