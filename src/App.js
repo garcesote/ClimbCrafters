@@ -46,47 +46,28 @@ function App() {
 
     const localIdToken = localStorage.getItem("idToken");
     if (localIdToken) {
-      // TODO: hacer la petición al endpoint de firebase para detectar si el token del storage es válido y de qué usuario es.
-      
       // Verify the token with Firebase Authentication API
-      // fetch(
-      //   `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`,
-      //   {
-      //     method: 'POST',
-      //     body: JSON.stringify({
-      //       idToken: localIdToken,
-      //     }),
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //   }
-      // )
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //       console.log(data)
-      //     setUser(data.users[0]);
-      //   })
-      //   .catch((error) => console.error(error));
-      
-
-      // Buscar en la BBDD un idToken igual al que hay guardado en el localStorage de la web
-      axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-        .then((response) => {
-          const loggedUser = Object.values(response.data).filter((user) => {
-            if (user !== null) {
-              if (user.idToken !== null && user.idToken) {
-                return user.idToken === localIdToken
-              }
-            }
-          })
-          // Se ha detectado una sesión
-          if (loggedUser != '') {
+      fetch(
+        'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            idToken: localIdToken,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
             setLogin(true);
-            setEmail(loggedUser[0].email.split('.').join(""))
+            setEmail(data.users[0].email.split('.').join(""))
             console.log("sesión iniciada")
 
             //CARGAMOS EL CARRITO DEL USUARIO
-            axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loggedUser[0].email.split('.').join("")+"/carrito.json")
+            axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+data.users[0].email.split('.').join("")+"/carrito.json")
             .then(res => {
                 let arrayProductos = [];
                 const data = res.data;
@@ -105,13 +86,35 @@ function App() {
                 console.log("HOLAAA");
                 setCarritoData(arrayProductos);
               });
-          }
-
         }).catch((error) => {
-          console.log(error)
-        }).then( () => {
-          
+          console.error(error);
         })
+      
+
+      // // Buscar en la BBDD un idToken igual al que hay guardado en el localStorage de la web
+      // axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+      //   .then((response) => {
+      //     const loggedUser = Object.values(response.data).filter((user) => {
+      //       if (user !== null) {
+      //         if (user.idToken !== null && user.idToken) {
+      //           return user.idToken === localIdToken
+      //         }
+      //       }
+      //     })
+      //     // Se ha detectado una sesión
+      //     if (loggedUser != '') {
+      //       setLogin(true);
+      //       setEmail(loggedUser[0].email.split('.').join(""))
+      //       console.log("sesión iniciada")
+
+            
+      //     }
+
+      //   }).catch((error) => {
+      //     console.log(error)
+      //   }).then( () => {
+          
+      //   })
     }
     else {
       console.log("No session detected")
