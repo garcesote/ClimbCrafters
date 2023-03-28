@@ -52,7 +52,7 @@ function CustomerDetails() {
                 }).catch((error) => {
                     console.log(error)
                 })
-            navigate('/orders')
+            navigate('/thanks')
         }
         else {
             setError(true)

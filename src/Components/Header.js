@@ -54,9 +54,9 @@ const Header = () => {
                                 </Button>
                         }
                     </Nav>
-                    <Nav>
+                    {/* <Nav>
                         <label style={{color:"white"}}>Welcome {loginContext.email}</label>
-                    </Nav>
+                    </Nav> */}
 
                 </Container>
             </Navbar>

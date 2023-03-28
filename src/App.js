@@ -15,6 +15,7 @@ import Signup from './Pages/Signup';
 import DetailProduct from './Pages/DetailProduct';
 import Confirmation from './Pages/Confirmation';
 import CustomerDetails from './Pages/CustomerDetails';
+import Thanks from './Pages/Thanks';
 
 function App() {
 
@@ -132,6 +133,7 @@ function App() {
                       <Route path='/detail-product/:id' element={<DetailProduct />} />
                       <Route path='/confirmation' element={<Confirmation />} />
                       <Route path='/customer-details' element={<CustomerDetails />} />
+                      <Route path='/thanks' element={<Thanks />} />
                     </Routes>
                   </Col>
                   <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
@@ -150,6 +152,7 @@ function App() {
                       <Route path='/detail-product/:id' element={<DetailProduct />} />
                       <Route path='/confirmation' element={<Confirmation />} />
                       <Route path='/customer-details' element={<CustomerDetails />} />
+                      <Route path='/thanks' element={<Thanks />} />
                     </Routes>
                   </Col>
                 </Row>
