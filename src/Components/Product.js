@@ -1,7 +1,9 @@
+import axios from "axios";
 import { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AutContext from "../Storage/AutContext";
+import LoginContext from "../Storage/LoginContext";
 import './Product.css';
 
 
@@ -9,18 +11,26 @@ const Product = (props) => {
 
     const carritoContext = useContext(AutContext);
 
+    const loginContext = useContext(LoginContext);
+
     const carritoData = carritoContext.carritoData;
 
     const producto = props.producto;
 
     const addHandler = () => {
         
-        console.log('Producto: '+producto);
+        console.log('Carrito: ');
+        console.log(carritoData);
         let rep = false;
         let item = [...carritoData]
+        
         item.filter((elemento) => {
             if(elemento.id===producto.id){
-                producto.cantidad += 1;
+                elemento.cantidad = elemento.cantidad + 1;
+                axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
+                .then((response) => {
+                    console.log('MAS 1');
+                });
                 rep = true;
             }
         });
@@ -29,8 +39,20 @@ const Product = (props) => {
             let productoCarrito = producto;
             productoCarrito.cantidad = 1;
             item.push(productoCarrito);
+            const id = productoCarrito.id;
+            delete productoCarrito.id;
+            axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito.json", {[id]: productoCarrito})
+            .then((response) => {
+                alert('Nuevo producto añadido al carrito');
+            });
         }
+
+        console.log('Producto: ');
+        console.log(producto);
         carritoContext.setCarritoData(item);
+        console.log('MAIL: ');
+        console.log(loginContext.email);
+        
     }
 
     const removeHandler = () => {
@@ -40,8 +62,12 @@ const Product = (props) => {
         item.filter((elemento) => {
             if(elemento.id===producto.id){
                 console.log(producto.id)
-                if(producto.cantidad>0){
-                    producto.cantidad -= 1;
+                if(elemento.cantidad>0){
+                    elemento.cantidad -= 1;
+                    axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
+                    .then((response) => {
+                        console.log('MENOS 1');
+                    });
                     rep = true;
                 }
             }

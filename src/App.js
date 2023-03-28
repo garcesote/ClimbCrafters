@@ -14,7 +14,6 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import DetailProduct from './Pages/DetailProduct';
 import Confirmation from './Pages/Confirmation';
-import CustomerDetails from './Pages/CustomerDetails';
 
 function App() {
 
@@ -62,64 +61,41 @@ function App() {
           if (loggedUser != '') {
             setLogin(true);
             setEmail(loggedUser[0].email.split('.').join(""))
-            console.log("sesión iniciada: " + loggedUser[0].email.split('.').join(""))
-            
+            console.log("sesión iniciada")
+
+            //CARGAMOS EL CARRITO DEL USUARIO
+            axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loggedUser[0].email.split('.').join("")+"/carrito.json")
+            .then(res => {
+                let arrayProductos = [];
+                const data = res.data;
+                for(let key in data){
+                    arrayProductos.push({
+                        id:key,
+                        nombre:data[key].nombre,
+                        descripcion:data[key].descripcion,
+                        precio:data[key].precio,
+                        img: data[key].img,
+                        cantidad: data[key].cantidad
+                    })
+                }
+                console.log(arrayProductos);
+                console.log(email);
+                console.log("HOLAAA");
+                setCarritoData(arrayProductos);
+              });
           }
-          // console.log(loggedUser)
+
         }).catch((error) => {
           console.log(error)
         }).then( () => {
-          //CARGAMOS EL CARRITO DEL USUARIO
-          axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+email+"/carrito.json")
-          .then(res => {
-              let arrayProductos = [];
-              const data = res.data;
-              for(let key in data){
-                  arrayProductos.push({
-                      id:key,
-                      nombre:data[key].nombre,
-                      descripcion:data[key].descripcion,
-                      precio:data[key].precio,
-                      img: data[key].img,
-                      cantidad: data[key].cantidad
-                  })
-              }
-              //console.log(arrayProductos);
-              //console.log(email);
-              //console.log("HOLAAA");
-              setCarritoData(arrayProductos);
-            });
+          
         })
-
-      // console.log("Header mounted")
     }
     else {
       console.log("No session detected")
     }
 
   }, [])
-  
-  /*.then( () => {
-    
-    axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+id+"/carrito.json")
-    .then(res => {
-        let arrayProductos = [];
-        const data = res.data;
-        for(let key in data){
-            arrayProductos.push({
-                id:key,
-                nombre:data[key].nombre,
-                descripcion:data[key].descripcion,
-                precio:data[key].precio,
-                img: data[key].img,
-                cantidad: data[key].cantidad
-            })
-        }
-        console.log(arrayProductos);
-        console.log("HOLAAA");
-        setCarritoData(arrayProductos);
-      });
-  })*/
 
   return (
     <>
@@ -139,7 +115,6 @@ function App() {
                       <Route path='/signup' element={<Signup />} />
                       <Route path='/detail-product/:id' element={<DetailProduct />} />
                       <Route path='/confirmation' element={<Confirmation />} />
-                      <Route path='/customer-details' element={<CustomerDetails />} />
                     </Routes>
                   </Col>
                   <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
@@ -157,7 +132,6 @@ function App() {
                       <Route path='/signup' element={<Signup />} />
                       <Route path='/detail-product/:id' element={<DetailProduct />} />
                       <Route path='/confirmation' element={<Confirmation />} />
-                      <Route path='/customer-details' element={<CustomerDetails />} />
                     </Routes>
                   </Col>
                 </Row>

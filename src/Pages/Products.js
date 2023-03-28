@@ -10,7 +10,7 @@ const Products = () => {
 
     const axiosTest = () => {
         console.log("Axios is ok")
-        axios.get("https://clase-react-8ce4d-default-rtdb.europe-west1.firebasedatabase.app/ClimbCrafters.json")
+        axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/products.json")
         .then(res => {
             let arrayProductos = [];
             const data = res.data;
