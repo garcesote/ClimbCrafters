@@ -59,11 +59,7 @@ const Product = (props) => {
             if(elemento.id===producto.id){
                 if(elemento.cantidad>0){
                     elemento.cantidad -= 1;
-                    axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
-                    .then((response) => {
-                        console.log('MENOS 1');
-                    });
-                    rep = true;
+                    
 
                     //ELIMINO EL PRODUCTO DEL CARRITO SI LA CANTIDAD ES CERO
                     if(elemento.cantidad==0){
@@ -76,10 +72,16 @@ const Product = (props) => {
                         //EN LA NUBE
                         axios.delete("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json")
                         .then((response) => {
+                            console.log(elemento.id);
                             console.log('BORRADO NUBE');
                         });
                         
                     }else{
+                        axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
+                        .then((response) => {
+                            console.log('MENOS 1');
+                        });
+                        rep = true;
                         carritoContext.setCarritoData(item);
                     }
 
