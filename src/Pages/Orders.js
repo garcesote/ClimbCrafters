@@ -3,6 +3,7 @@ import AutContext from "../Storage/AutContext";
 import LoginContext from "../Storage/LoginContext";
 import axios from 'axios';
 import "./Orders.css";
+import OrderItem from "../Components/OrderItem";
 
 const Orders = () => {
 
@@ -47,12 +48,13 @@ const Orders = () => {
                         {
                             orders.map((item) => {
                                 return (
-                                    <div className="order" onClick={handleOrderDetails} id={item.orderId}>
-                                        <p className="orderDetails"> Some products: {item.products[0].nombre}</p>
-                                        <p className="orderDetails"> Address: {item.details.address}</p>
-                                        <p className="orderDetails"> Name: {item.details.name}</p>
-                                        <p className="orderDetails"> Productos: {item.products.length}</p>
-                                    </div>
+                                    <OrderItem key={item.orderId} name={item.details.name}></OrderItem>
+                                    // <div className="order" onClick={handleOrderDetails} id={item.orderId}>
+                                    //     <p className="orderDetails"> Some products: {item.products[0].nombre}</p>
+                                    //     <p className="orderDetails"> Address: {item.details.address}</p>
+                                    //     <p className="orderDetails"> Name: {item.details.name}</p>
+                                    //     <p className="orderDetails"> Productos: {item.products.length}</p>
+                                    // </div>
 
                                 )
                             })

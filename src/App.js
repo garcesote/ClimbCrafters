@@ -35,7 +35,7 @@ function App() {
   // Comprobar si hay una sesión iniciada al abrir el navegador
   useEffect(() => {
 
-    console.log('EEEEIII');
+    console.log('EEEEIIIe');
     const localIdToken = localStorage.getItem("idToken");
     if (localIdToken) {
       // Verify the token with Firebase Authentication API
