@@ -20,6 +20,8 @@ const Header = () => {
         loginContext.setLoginData("");
         localStorage.removeItem("idToken");
         loginContext.setEmail("");
+        carrito.setCarritoData([]);
+        // carrito.set(false);
         
         // TODO: crear un modal de logout
         alert("Hope you come back again!")

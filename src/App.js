@@ -31,7 +31,7 @@ function App() {
       <Carrito></Carrito>
     </Col>
   )
-  
+
   // Comprobar si hay una sesión iniciada al abrir el navegador
   useEffect(() => {
 
@@ -39,80 +39,54 @@ function App() {
     const localIdToken = localStorage.getItem("idToken");
     if (localIdToken) {
       // Verify the token with Firebase Authentication API
-      fetch(
-        'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            idToken: localIdToken,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-        .then((response) => response.json())
+      const idToken = {
+        idToken: localIdToken
+      }
+      axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw', idToken)
         .then((data) => {
-            console.log(data)
-            setLogin(true);
-            setEmail(data.users[0].email.split('.').join(""))
-            console.log("sesión iniciada")
-
-            //CARGAMOS EL CARRITO DEL USUARIO
-            axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+data.users[0].email.split('.').join("")+"/carrito.json")
-            .then(res => {
-                let arrayProductos = [];
-                const data = res.data;
-                console.log('CARRITO: ');
-                console.log(data);
-                for(let key in data){
-                    arrayProductos.push({
-                        id:key,
-                        nombre:data[key].nombre,
-                        descripcion:data[key].descripcion,
-                        precio:data[key].precio,
-                        img: data[key].img,
-                        cantidad: data[key].cantidad
-                    })
-                }
-                console.log("HOLAAA");
-                setCarritoData(arrayProductos);
-              });
+          console.log(data)
+          setLogin(true);
+          setEmail(data.data.users[0].email.split('.').join(""))
+          console.log("sesión iniciada")
         }).catch((error) => {
           console.error(error);
         })
-      
-
-      // // Buscar en la BBDD un idToken igual al que hay guardado en el localStorage de la web
-      // axios.get('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-      //   .then((response) => {
-      //     const loggedUser = Object.values(response.data).filter((user) => {
-      //       if (user !== null) {
-      //         if (user.idToken !== null && user.idToken) {
-      //           return user.idToken === localIdToken
-      //         }
-      //       }
-      //     })
-      //     // Se ha detectado una sesión
-      //     if (loggedUser != '') {
-      //       setLogin(true);
-      //       setEmail(loggedUser[0].email.split('.').join(""))
-      //       console.log("sesión iniciada")
-
-            
-      //     }
-
-      //   }).catch((error) => {
-      //     console.log(error)
-      //   }).then( () => {
-          
-      //   })
     }
     else {
       console.log("No session detected")
     }
 
   }, [])
+
+  useEffect(() => {
+    //CARGAMOS EL CARRITO DEL USUARIO cuando iniciamos sesión
+
+    if (login === true) {
+      console.log("peticion carrito")
+      console.log(email)
+      axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/" + email + "/carrito.json")
+        .then(res => {
+          let arrayProductos = [];
+          const data = res.data;
+          console.log('CARRITO: ');
+          console.log(data);
+          for (let key in data) {
+            if (data[key] != null) {
+              arrayProductos.push({
+                id: key,
+                nombre: data[key].nombre,
+                descripcion: data[key].descripcion,
+                precio: data[key].precio,
+                img: data[key].img,
+                cantidad: data[key].cantidad
+              })
+            }
+          }
+          console.log("HOLAAA");
+          setCarritoData(arrayProductos);
+        });
+    }
+  }, [login])
 
   return (
     <>

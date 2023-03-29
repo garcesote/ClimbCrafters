@@ -50,6 +50,8 @@ function Login() {
                     axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + response.data.email.split('.').join("") + '.json', newTokenId)
                         .then((response) => {
 
+                            // Cargar Carrito
+
                         }).catch((error) => {
                             console.log(error)
                         })
