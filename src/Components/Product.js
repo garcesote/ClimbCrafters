@@ -21,81 +21,97 @@ const Product = (props) => {
         
         console.log('Carrito: ');
         console.log(carritoData);
-        let rep = false;
-        let item = [...carritoData]
-        
-        item.filter((elemento) => {
-            if(elemento.id===producto.id){
-                elemento.cantidad = elemento.cantidad + 1;
-                axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
-                .then((response) => {
-                    console.log('MAS 1');
-                });
-                rep = true;
-            }
-        });
 
-        if(!rep){
-            let productoCarrito = producto;
-            productoCarrito.cantidad = 1;
-            item.push(productoCarrito);
-            const id = productoCarrito.id;
-            axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito.json", {[id]: productoCarrito})
-            .then((response) => {
-                console.log('Nuevo producto añadido al carrito');
+        console.log('Login: ');
+        console.log(LoginContext);
+
+        if(loginContext.login){
+
+            let rep = false;
+            let item = [...carritoData]
+            
+            item.filter((elemento) => {
+                if(elemento.id===producto.id){
+                    elemento.cantidad = elemento.cantidad + 1;
+                    axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
+                    .then((response) => {
+                        console.log('MAS 1');
+                    });
+                    rep = true;
+                }
             });
-        }
 
-        carritoContext.setCarritoData(item);
-        carritoContext.set(true);
+            if(!rep){
+                let productoCarrito = producto;
+                productoCarrito.cantidad = 1;
+                item.push(productoCarrito);
+                const id = productoCarrito.id;
+                axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito.json", {[id]: productoCarrito})
+                .then((response) => {
+                    console.log('Nuevo producto añadido al carrito');
+                });
+            }
+
+            carritoContext.setCarritoData(item);
+            carritoContext.set(true);
+        }else{
+            alert('Inicie sesion para añadir al carrito');
+        }
         
     }
 
     const removeHandler = () => {
-        let rep = false;
-        let item = [...carritoData];
 
-        item.filter((elemento) => {
-            if(elemento.id===producto.id){
-                if(elemento.cantidad>0){
-                    elemento.cantidad -= 1;
-                    
+        if(loginContext.login){
 
-                    //ELIMINO EL PRODUCTO DEL CARRITO SI LA CANTIDAD ES CERO
-                    if(elemento.cantidad==0){
-                        //EN LOCAL
-                        const rem_item = item.filter((obj) => {
-                            return obj.id !== elemento.id;
-                        })
-                        carritoContext.setCarritoData(rem_item);
+            let rep = false;
+            let item = [...carritoData];
 
-                        //EN LA NUBE
-                        axios.delete("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json")
-                        .then((response) => {
-                            console.log(elemento.id);
-                            console.log('BORRADO NUBE');
-                        });
+            item.filter((elemento) => {
+                if(elemento.id===producto.id){
+                    if(elemento.cantidad>0){
+                        elemento.cantidad -= 1;
                         
-                    }else{
-                        axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
-                        .then((response) => {
-                            console.log('MENOS 1');
-                        });
+
+                        //ELIMINO EL PRODUCTO DEL CARRITO SI LA CANTIDAD ES CERO
+                        if(elemento.cantidad==0){
+                            //EN LOCAL
+                            const rem_item = item.filter((obj) => {
+                                return obj.id !== elemento.id;
+                            })
+                            carritoContext.setCarritoData(rem_item);
+
+                            //EN LA NUBE
+                            axios.delete("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json")
+                            .then((response) => {
+                                console.log(elemento.id);
+                                console.log('BORRADO NUBE');
+                            });
+                            
+                        }else{
+                            axios.patch("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/"+loginContext.email+"/carrito/"+elemento.id+".json", {cantidad: elemento.cantidad})
+                            .then((response) => {
+                                console.log('MENOS 1');
+                            });
+                            rep = true;
+                            carritoContext.setCarritoData(item);
+                        }
+
                         rep = true;
-                        carritoContext.setCarritoData(item);
+                        
                     }
-
-                    rep = true;
-                    
                 }
+            });
+            if(!rep){
+                alert('No hay cantidad de ese producto');
             }
-        });
-        if(!rep){
-            alert('No hay cantidad de ese producto');
-        }
 
+            
+            carritoContext.set(true);
+        }else{
+            alert('Inicie sesion para añadir al carrito');
+        }
         
-        carritoContext.set(true);
 
     }
     
