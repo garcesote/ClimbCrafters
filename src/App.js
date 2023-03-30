@@ -28,6 +28,7 @@ function App() {
   const loginContext = useContext(LoginContext);
   const [email, setEmail] = useState("");
   const [orders, setOrders] = useState([]);
+  const [reload, setReload] = useState(false);
 
   const carritoComponent = (
     <Col style={{ height: '90vh', width: '40vw', backgroundColor: 'lightgrey', position: 'fixed', right: '0px' }}>
@@ -95,7 +96,7 @@ function App() {
     <>
       <AutContext.Provider value={{ carrito: carrito, set: setCarrito, carritoData: carritoData, setCarritoData: setCarritoData }}>
         <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData, email: email, setEmail: setEmail }}>
-          <OrdersContext.Provider value={{ orders: orders, setOrders: setOrders }}>
+          <OrdersContext.Provider value={{ orders: orders, setOrders: setOrders, reload: reload, setReload: setReload }}>
             <Header />
             <Container style={{ maxWidth: '100%' }}>
               {
