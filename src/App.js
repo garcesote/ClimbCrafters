@@ -16,6 +16,8 @@ import DetailProduct from './Pages/DetailProduct';
 import Confirmation from './Pages/Confirmation';
 import CustomerDetails from './Pages/CustomerDetails';
 import Thanks from './Pages/Thanks';
+import OrderDetails from './Pages/OrderDetails';
+import OrdersContext from './Storage/OrdersContext';
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
   const [loginData, setLoginData] = useState();
   const loginContext = useContext(LoginContext);
   const [email, setEmail] = useState("");
+  const [orders, setOrders] = useState([]);
 
   const carritoComponent = (
     <Col style={{ height: '90vh', width: '40vw', backgroundColor: 'lightgrey', position: 'fixed', right: '0px' }}>
@@ -92,46 +95,50 @@ function App() {
     <>
       <AutContext.Provider value={{ carrito: carrito, set: setCarrito, carritoData: carritoData, setCarritoData: setCarritoData }}>
         <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData, email: email, setEmail: setEmail }}>
-          <Header />
-          <Container style={{ maxWidth: '100%' }}>
-            {
-              carrito ?
-                <Row className='containerFondo'>
-                  <Col style={{ height: '90vh' }} sm={9}>
-                    <Routes>
-                      <Route path='/' element={<Home />} />
-                      <Route path='/products' element={<Products />} />
-                      <Route path='/orders' element={<Orders />} />
-                      <Route path='/login' element={<Login />} />
-                      <Route path='/signup' element={<Signup />} />
-                      <Route path='/detail-product/:id' element={<DetailProduct />} />
-                      <Route path='/confirmation' element={<Confirmation />} />
-                      <Route path='/customer-details' element={<CustomerDetails />} />
-                      <Route path='/thanks' element={<Thanks />} />
-                    </Routes>
-                  </Col>
-                  <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
-                    <Carrito data={carritoData}></Carrito>
-                  </Col>
-                </Row>
-                :
-                <Row className='containerFondo'>
-                  <Col style={{ height: '90vh' }}>
-                    <Routes>
-                      <Route path='/' element={<Home />} />
-                      <Route path='/products' element={<Products />} />
-                      <Route path='/orders' element={<Orders />} />
-                      <Route path='/login' element={<Login />} />
-                      <Route path='/signup' element={<Signup />} />
-                      <Route path='/detail-product/:id' element={<DetailProduct />} />
-                      <Route path='/confirmation' element={<Confirmation />} />
-                      <Route path='/customer-details' element={<CustomerDetails />} />
-                      <Route path='/thanks' element={<Thanks />} />
-                    </Routes>
-                  </Col>
-                </Row>
-            }
-          </Container>
+          <OrdersContext.Provider value={{ orders: orders, setOrders: setOrders }}>
+            <Header />
+            <Container style={{ maxWidth: '100%' }}>
+              {
+                carrito ?
+                  <Row className='containerFondo'>
+                    <Col style={{ height: '90vh' }} sm={9}>
+                      <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/products' element={<Products />} />
+                        <Route path='/orders' element={<Orders />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/signup' element={<Signup />} />
+                        <Route path='/detail-product/:id' element={<DetailProduct />} />
+                        <Route path='/confirmation' element={<Confirmation />} />
+                        <Route path='/customer-details' element={<CustomerDetails />} />
+                        <Route path='/thanks' element={<Thanks />} />
+                        <Route path='/order-details/:id' element={<OrderDetails />} />
+                      </Routes>
+                    </Col>
+                    <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
+                      <Carrito data={carritoData}></Carrito>
+                    </Col>
+                  </Row>
+                  :
+                  <Row className='containerFondo'>
+                    <Col style={{ height: '90vh' }}>
+                      <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/products' element={<Products />} />
+                        <Route path='/orders' element={<Orders />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/signup' element={<Signup />} />
+                        <Route path='/detail-product/:id' element={<DetailProduct />} />
+                        <Route path='/confirmation' element={<Confirmation />} />
+                        <Route path='/customer-details' element={<CustomerDetails />} />
+                        <Route path='/thanks' element={<Thanks />} />
+                        <Route path='/order-details/:id' element={<OrderDetails />} />
+                      </Routes>
+                    </Col>
+                  </Row>
+              }
+            </Container>
+          </OrdersContext.Provider>
         </LoginContext.Provider>
       </AutContext.Provider>
     </>

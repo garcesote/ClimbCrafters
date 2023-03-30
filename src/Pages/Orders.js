@@ -4,12 +4,13 @@ import LoginContext from "../Storage/LoginContext";
 import axios from 'axios';
 import "./Orders.css";
 import OrderItem from "../Components/OrderItem";
+import OrdersContext from '../Storage/OrdersContext';
 
 const Orders = () => {
 
     const carrito = useContext(AutContext);
     const loginContext = useContext(LoginContext);
-    const [orders, setOrders] = useState([]);
+    const ordersContext = useContext(OrdersContext);
 
     const handleOrderDetails = (event) => {
         console.log(event.target.id)
@@ -29,7 +30,7 @@ const Orders = () => {
                             products: response.data[key].products,
                         })
                     }
-                    setOrders(ordersArray);
+                    ordersContext.setOrders(ordersArray);
 
                 }).catch((error) => {
                     console.log(error)
@@ -46,13 +47,14 @@ const Orders = () => {
                     <>
                         <h1>Your orders</h1>
                         {
-                            orders.map((item) => {
+                            ordersContext.orders.map((item) => {
                                 return (
-                                    <OrderItem key={item.orderId} name={item.details.name}></OrderItem>
+                                    <OrderItem orderId={item.orderId} name={item.details.name} products={item.products.length}></OrderItem>
                                     // <div className="order" onClick={handleOrderDetails} id={item.orderId}>
                                     //     <p className="orderDetails"> Some products: {item.products[0].nombre}</p>
                                     //     <p className="orderDetails"> Address: {item.details.address}</p>
                                     //     <p className="orderDetails"> Name: {item.details.name}</p>
+
                                     //     <p className="orderDetails"> Productos: {item.products.length}</p>
                                     // </div>
 
