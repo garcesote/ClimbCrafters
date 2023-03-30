@@ -28,6 +28,7 @@ const Orders = () => {
                             orderId: key,
                             details: response.data[key].details,
                             products: response.data[key].products,
+                            date: response.data[key].date
                         })
                     }
                     ordersContext.setOrders(ordersArray);
@@ -51,10 +52,10 @@ const Orders = () => {
                             orderId: key,
                             details: response.data[key].details,
                             products: response.data[key].products,
+                            date: response.data[key].date
                         })
                     }
                     ordersContext.setOrders(ordersArray);
-
                 }).catch((error) => {
                     console.log(error)
                 })
@@ -78,7 +79,7 @@ const Orders = () => {
                                     {
                                         ordersContext.orders.map((item) => {
                                             return (
-                                                <OrderItem orderId={item.orderId} name={item.details.name} products={item.products.length}></OrderItem>
+                                                <OrderItem orderId={item.orderId} name={item.details.name} products={item.products.length} date={item.date}></OrderItem>
                                             )
                                         })
                                     }

@@ -31,7 +31,8 @@ function CustomerDetails() {
         if (customerUser.length > 0 && customerAddress.length > 0) {
             const pedido = {
                 details: { name: customerUser, address: customerAddress },
-                products: carrito.carritoData
+                products: carrito.carritoData,
+                date: new Date()
             }
 
             // Guardar pedido en la base de datos

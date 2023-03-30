@@ -38,8 +38,7 @@ function App() {
 
   // Comprobar si hay una sesión iniciada al abrir el navegador
   useEffect(() => {
-
-    console.log('EEEEIIIe');
+    console.log(new Date())
     const localIdToken = localStorage.getItem("idToken");
     if (localIdToken) {
       // Verify the token with Firebase Authentication API
@@ -51,13 +50,13 @@ function App() {
           console.log(data)
           setLogin(true);
           setEmail(data.data.users[0].email.split('.').join(""))
-          console.log("sesión iniciada")
+          // console.log("sesión iniciada")
         }).catch((error) => {
           console.error(error);
         })
     }
     else {
-      console.log("No session detected")
+      // console.log("No session detected")
     }
 
   }, [])
@@ -72,7 +71,7 @@ function App() {
         .then(res => {
           let arrayProductos = [];
           const data = res.data;
-          console.log('CARRITO: ');
+          // console.log('CARRITO: ');
           console.log(data);
           for (let key in data) {
             if (data[key] != null) {
@@ -86,7 +85,7 @@ function App() {
               })
             }
           }
-          console.log("HOLAAA");
+          // console.log("HOLAAA");
           setCarritoData(arrayProductos);
         });
     }
