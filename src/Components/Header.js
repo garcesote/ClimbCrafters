@@ -17,13 +17,25 @@ const Header = () => {
     const carritoData = carrito.carritoData;
     
     useEffect(() => {
-        if(carritoData.length>0 && loginContext.login){
-            iconRef.current.color = 'green';
+        if(loginContext.login){
+            if(carritoData.length>0){
+                iconRef.current.className = 'bg-success rounded';
+                
+            }else{
+                iconRef.current.className = 'bg-danger rounded';
+            }
+        }else{
+                iconRef.current.className = 'rounded';
         }
-    },[carritoData]);
+            
+    },[carritoData, loginContext.login]);
     
     const carritoHandler = () => {
-        carrito.set(!carrito.carrito);
+        if(loginContext.login){
+            carrito.set(!carrito.carrito);
+        }else{
+            alert('Log in to see your shoping list')
+        }
     }
     const logout = () => {
         loginContext.setLogin(false);
@@ -43,7 +55,7 @@ const Header = () => {
         <>
             <Navbar bg="dark" variant="dark" style={{ height: '10vh' }}>
                 <Container>
-                    <Navbar.Brand  ref={iconRef}>
+                    <Navbar.Brand>
                         <Link to="/" style={{ color: "white", textDecoration: "none", marginRight: "2vw" }}>ClimbCrafters</Link>
                     </Navbar.Brand>
                     <Nav className="me-auto">
@@ -52,11 +64,12 @@ const Header = () => {
                         <Link to="/orders" style={{ color: "white", textDecoration: "none", marginRight: "2vw" }}>Orders</Link>
                     </Nav>
                     <Nav className="ms-auto">
+                    <Container ref={iconRef} >
+                        <AiOutlineShoppingCart color='white' className="m-4" onClick={carritoHandler} size={'30px'} />
+                    </Container>
                         {
                             loginContext.login ?
                                 <>
-                                    <AiOutlineShoppingCart color='white' className="m-4" size={'30px'} onClick={carritoHandler} />
-
                                     <Button variant="secondary" size="lg">
                                         <Link to="/" style={{ color: "white", textDecoration: "none" }} onClick={logout}>Logout</Link>
                                     </Button>

@@ -96,10 +96,10 @@ function App() {
         <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData, email: email, setEmail: setEmail }}>
           <OrdersContext.Provider value={{ orders: orders, setOrders: setOrders, reload: reload, setReload: setReload }}>
             <Header />
-            <Container style={{ maxWidth: '100%' }}>
+            <Container className='containerFondo'>
               {
                 carrito ?
-                  <Row className='containerFondo'>
+                  <Row>
                     <Col style={{ height: '90vh' }} sm={9}>
                       <Routes>
                         <Route path='/' element={<Home />} />
@@ -119,7 +119,7 @@ function App() {
                     </Col>
                   </Row>
                   :
-                  <Row className='containerFondo'>
+                  <Row>
                     <Col style={{ height: '90vh' }}>
                       <Routes>
                         <Route path='/' element={<Home />} />

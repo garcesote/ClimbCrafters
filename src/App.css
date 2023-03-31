@@ -3,7 +3,7 @@
   background-image: url('./images/fondoWeb.jpg');
   /*background-color: #282c34;*/
   object-fit: fill;
-  min-height: 100vh;
+  min-height: 100%;
   min-width: 100%;
 }
 
