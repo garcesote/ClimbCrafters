@@ -59,11 +59,10 @@ function App() {
   }, [])
 
   useEffect(() => {
-    //CARGAMOS EL CARRITO DEL USUARIO cuando iniciamos sesión
 
+    //CARGAMOS EL CARRITO DEL USUARIO cuando iniciamos sesión
     if (login === true) {
-      console.log("peticion carrito")
-      console.log(email)
+
       axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/" + email + "/carrito.json")
         .then(res => {
           let arrayProductos = [];
@@ -93,11 +92,11 @@ function App() {
       <AutContext.Provider value={{ carrito: carrito, set: setCarrito, carritoData: carritoData, setCarritoData: setCarritoData }}>
         <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData, email: email, setEmail: setEmail }}>
           <Header />
-          <Container style={{ maxWidth: '100%' }}>
+          <Container  className='containerFondo'>
             {
               carrito ?
-                <Row className='containerFondo'>
-                  <Col style={{ height: '90vh' }} sm={9}>
+                <Row style={{ minWidth: '100%'}}>
+                  <Col style={{ height: '100%'}} sm={9}>
                     <Routes>
                       <Route path='/' element={<Home />} />
                       <Route path='/products' element={<Products />} />
@@ -110,13 +109,13 @@ function App() {
                       <Route path='/thanks' element={<Thanks />} />
                     </Routes>
                   </Col>
-                  <Col sm={3} style={{ height: '90vh', backgroundColor: 'lightgrey' }}>
+                  <Col sm={3} style={{ height: '100vh', backgroundColor: 'lightgrey' }}>
                     <Carrito data={carritoData}></Carrito>
                   </Col>
                 </Row>
                 :
-                <Row className='containerFondo'>
-                  <Col style={{ height: '90vh' }}>
+                <Row style={{ minWidth: '100%'}}>
+                  <Col style={{ height: '100%' }}>
                     <Routes>
                       <Route path='/' element={<Home />} />
                       <Route path='/products' element={<Products />} />

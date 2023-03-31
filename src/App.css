@@ -1,6 +1,10 @@
 
 .containerFondo{
   background-image: url('./images/fondoWeb.jpg');
+  /*background-color: #282c34;*/
+  object-fit: fill;
+  min-height: 100vh;
+  min-width: 100%;
 }
 
 .App-header {
