@@ -25,7 +25,7 @@ const Order = ({ data }) => {
             {
                 data.map((product) => {
                     return (
-                        <div className="product">
+                        <div className="product" id={product.id}>
                             <div className="productName">
                                 <Image
                                     className="d-block w-80"

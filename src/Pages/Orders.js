@@ -4,12 +4,13 @@ import LoginContext from "../Storage/LoginContext";
 import axios from 'axios';
 import "./Orders.css";
 import OrderItem from "../Components/OrderItem";
+import OrdersContext from '../Storage/OrdersContext';
 
 const Orders = () => {
 
     const carrito = useContext(AutContext);
     const loginContext = useContext(LoginContext);
-    const [orders, setOrders] = useState([]);
+    const ordersContext = useContext(OrdersContext);
 
     const handleOrderDetails = (event) => {
         console.log(event.target.id)
@@ -27,9 +28,10 @@ const Orders = () => {
                             orderId: key,
                             details: response.data[key].details,
                             products: response.data[key].products,
+                            date: response.data[key].date
                         })
                     }
-                    setOrders(ordersArray);
+                    ordersContext.setOrders(ordersArray);
 
                 }).catch((error) => {
                     console.log(error)
@@ -37,29 +39,52 @@ const Orders = () => {
         }
 
     }, [loginContext.login])
-    
+
+    useEffect(() => {
+        console.log("reloading orders")
+        if (loginContext.login === true) {
+            axios.get("https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/" + loginContext.email + "/pedidos.json")
+                .then((response) => {
+                    console.log(response)
+                    let ordersArray = [];
+                    for (let key in response.data) {
+                        ordersArray.push({
+                            orderId: key,
+                            details: response.data[key].details,
+                            products: response.data[key].products,
+                            date: response.data[key].date
+                        })
+                    }
+                    ordersContext.setOrders(ordersArray);
+                }).catch((error) => {
+                    console.log(error)
+                })
+        }
+
+    }, [ordersContext.reload])
+
     return (
         <div>
             {
                 loginContext.login
                     ?
                     <>
-                        <h1>Your orders</h1>
                         {
-                            orders.map((item) => {
-                                return (
-                                    <OrderItem key={item.orderId} name={item.details.name}></OrderItem>
-                                    // <div className="order" onClick={handleOrderDetails} id={item.orderId}>
-                                    //     <p className="orderDetails"> Some products: {item.products[0].nombre}</p>
-                                    //     <p className="orderDetails"> Address: {item.details.address}</p>
-                                    //     <p className="orderDetails"> Name: {item.details.name}</p>
-                                    //     <p className="orderDetails"> Productos: {item.products.length}</p>
-                                    // </div>
-
-                                )
-                            })
+                            ordersContext.orders.length === 0
+                                ?
+                                <h1> See our products and make your first order!</h1>
+                                :
+                                <>
+                                    <h1>Your orders</h1>
+                                    {
+                                        ordersContext.orders.map((item) => {
+                                            return (
+                                                <OrderItem orderId={item.orderId} name={item.details.name} products={item.products.length} date={item.date}></OrderItem>
+                                            )
+                                        })
+                                    }
+                                </>
                         }
-
                     </>
                     :
                     <h1>Login to see your orders</h1>

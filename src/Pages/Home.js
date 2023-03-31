@@ -13,7 +13,7 @@ function Home() {
 
     return (
         <>
-            <Carousel className='mt-4 text-center carousel'>
+            <Carousel className='mt-4 text-center carousel' style={{color: "white"}}>
                 <Carousel.Item className='justify-content-md-center'>
                     <Image
                         className="d-block w-80"
