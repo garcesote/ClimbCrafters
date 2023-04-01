@@ -1,0 +1,15 @@
+.orderItem {
+    background-color: moccasin;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.orderItem:hover {
+    background-color: rgb(255, 234, 198);
+}
+.row {
+}
+
+.col {
+}

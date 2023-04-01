@@ -1,3 +1,8 @@
+.homeCarousel {
+  width: 100vw;
+  margin-top: 10rem;
+}
+
 .carousel img {
 
     margin:auto;
@@ -16,9 +21,7 @@
 }
 
 .carouselText{
-
-    color:Black
-
+  color:rgb(0, 0, 0);
 }
 
 /*.carousel-control-prev-icon,

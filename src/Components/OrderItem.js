@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
-import './Order.css';
+import './OrderItem.css';
 import { Link, Navigate } from 'react-router-dom';
 import LoginContext from '../Storage/LoginContext';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import OrdersContext from '../Storage/OrdersContext';
+import { Col, Container, Row } from "react-bootstrap";
 
-const OrderItem = ({ orderId, name, products, date }) => {
+
+const OrderItem = ({ orderId, name, products, date, address }) => {
 
     //TODO: Eliminar order
     // Delete order from context and database
@@ -29,16 +31,25 @@ const OrderItem = ({ orderId, name, products, date }) => {
     }
 
     return (
-        <div className="order">
-            <Link to={`/order-details/${orderId}`}>
-                <div>
-                    <p>{date} </p>
-                    <p>{name} </p>
-                    <p>{products}</p>
-                </div>
+        // <div className="order">
+        //     <Link to={`/order-details/${orderId}`}>
+        //         <div>
+        //             <p>{date} </p>
+        //             <p>{name} </p>
+        //             <p>{products}</p>
+        //         </div>
+        //     </Link>
+        // </div>
+        <Container className="orderItem">
+            <Link to={`/order-details/${orderId}`} style={{"text-decoration": "none", "color": "black"}}>
+                <Row className="row">
+                    <Col sm className="col">{date}</Col>
+                    <Col sm className="col">Delivered to: {name} at {address}</Col>
+                    <Col sm className="col">Products: {products}</Col>
+                    <Col sm className="col"><Button onClick={handleDeleteOrder}>X</Button></Col>
+                </Row>
             </Link>
-            <Button onClick={handleDeleteOrder}>X</Button>
-        </div>
+        </Container>
 
     )
 }

@@ -96,7 +96,7 @@ function App() {
         <LoginContext.Provider value={{ login: login, setLogin: setLogin, loginData: loginData, setLoginData: setLoginData, email: email, setEmail: setEmail }}>
           <OrdersContext.Provider value={{ orders: orders, setOrders: setOrders, reload: reload, setReload: setReload }}>
             <Header />
-            <Container className='containerFondo'>
+            <div className='containerFondo'>
               {
                 carrito ?
                   <Row>
@@ -136,7 +136,7 @@ function App() {
                     </Col>
                   </Row>
               }
-            </Container>
+            </div>
           </OrdersContext.Provider>
         </LoginContext.Provider>
       </AutContext.Provider>

@@ -77,11 +77,11 @@ const Orders = () => {
                                 <Alert variant='primary'> See our products and make your first order!</Alert>
                                 :
                                 <>
-                                    <h1>Your orders</h1>
+                                    <h1 className="ordersTitle">Your orders</h1>
                                     {
                                         ordersContext.orders.map((item) => {
                                             return (
-                                                <OrderItem orderId={item.orderId} name={item.details.name} products={item.products.length} date={item.date}></OrderItem>
+                                                <OrderItem orderId={item.orderId} name={item.details.name} products={item.products.length} date={item.date} address={item.details.address}></OrderItem>
                                             )
                                         })
                                     }

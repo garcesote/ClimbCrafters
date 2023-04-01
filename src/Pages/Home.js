@@ -12,7 +12,7 @@ function Home() {
     const loginContext = useContext(LoginContext);
 
     return (
-        <>
+        <div className="homeCarousel">
             <Carousel className='mt-4 text-center carousel' style={{color: "white"}}>
                 <Carousel.Item className='justify-content-md-center'>
                     <Image
@@ -51,7 +51,7 @@ function Home() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-        </>
+        </div>
     );
 }
 

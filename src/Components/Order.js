@@ -36,8 +36,8 @@ const Order = ({ data }) => {
                                 <div>{product.nombre}  </div>
                             </div>
                             <div className="productPrice">
-                                <div className="quantity"> {product.cantidad}</div>
-                                <div className="price"> {product.precio}$ </div>
+                                <div className="quantity"> Quantity: {product.cantidad}</div>
+                                <div className="price"> Price {product.precio}$ </div>
                             </div>
 
                         </div>
