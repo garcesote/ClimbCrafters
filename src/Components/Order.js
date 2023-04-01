@@ -30,7 +30,7 @@ const Order = ({ data }) => {
                                 <Image
                                     className="d-block w-80"
                                     style={{ maxHeight: '50px' }}
-                                    src="https://firebasestorage.googleapis.com/v0/b/clase-react-8ce4d.appspot.com/o/carousel-2.jpeg?alt=media&token=8e80bfe5-a437-49b4-bf12-c36f9d3231a2"
+                                    src={product.img}
                                     alt="First slide"
                                 />
                                 <div>{product.nombre}  </div>

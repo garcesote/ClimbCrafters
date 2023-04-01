@@ -5,6 +5,8 @@ import axios from 'axios';
 import "./Orders.css";
 import OrderItem from "../Components/OrderItem";
 import OrdersContext from '../Storage/OrdersContext';
+import { Alert, Col, Container, Row } from "react-bootstrap";
+
 
 const Orders = () => {
 
@@ -72,7 +74,7 @@ const Orders = () => {
                         {
                             ordersContext.orders.length === 0
                                 ?
-                                <h1> See our products and make your first order!</h1>
+                                <Alert variant='primary'> See our products and make your first order!</Alert>
                                 :
                                 <>
                                     <h1>Your orders</h1>
@@ -87,7 +89,7 @@ const Orders = () => {
                         }
                     </>
                     :
-                    <h1>Login to see your orders</h1>
+                    <Alert variant='primary'> Login to see your orders</Alert>
             }
 
         </div>
