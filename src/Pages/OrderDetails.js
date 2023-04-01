@@ -24,7 +24,7 @@ const OrderDetails = () => {
 
     return (
         <>
-            <h1>Detalles de tu pedido</h1>
+            <h1 style={{"color": "white"}}>Detalles de tu pedido</h1>
             <Order data={desiredOrder[0].products}></Order>
         </>
         )

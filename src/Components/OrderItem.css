@@ -8,8 +8,10 @@
 .orderItem:hover {
     background-color: rgb(255, 234, 198);
 }
-.row {
-}
 
-.col {
+.orderRow {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
 }

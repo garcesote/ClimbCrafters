@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import styles from './Order.css'
+import './Order.css'
 import LoginContext from "../Storage/LoginContext";
 import AutContext from "../Storage/AutContext";
 import { Button, Form, Card, Row, Col, Container, Image } from 'react-bootstrap';
@@ -45,7 +45,7 @@ const Order = ({ data }) => {
                 })
             }
             <div className="productDetails">
-                <h3>Order price: {orderPrice} $</h3>
+                <h3 style={{"color": "black"}}>Order price: {orderPrice} $</h3>
             </div>
         </>
     )

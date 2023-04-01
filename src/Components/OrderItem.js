@@ -41,15 +41,18 @@ const OrderItem = ({ orderId, name, products, date, address }) => {
         //     </Link>
         // </div>
         <Container className="orderItem">
-            <Link to={`/order-details/${orderId}`} style={{"text-decoration": "none", "color": "black"}}>
-                <Row className="row">
-                    <Col sm className="col">{date}</Col>
-                    <Col sm className="col">Delivered to: {name} at {address}</Col>
-                    <Col sm className="col">Products: {products}</Col>
-                    <Col sm className="col"><Button onClick={handleDeleteOrder}>X</Button></Col>
-                </Row>
-            </Link>
-        </Container>
+            <Row className="row">
+                <Col>
+                    <Link to={`/order-details/${orderId}`} style={{ "text-decoration": "none", "color": "black" }}>
+                        <Col sm className="col">Order date: {date}</Col>
+                        <Col sm className="col">Delivered to: {name} at {address}</Col>
+                        <Col sm className="col">Products: {products}</Col>
+                    </Link>
+                </Col>
+
+                <Col sm className="col"><Button onClick={handleDeleteOrder} className="deleteButton">Delete</Button></Col>
+            </Row>
+        </Container >
 
     )
 }
