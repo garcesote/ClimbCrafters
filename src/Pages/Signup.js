@@ -36,11 +36,7 @@ function Signup() {
                     password: password,
                     returnSecureToken: true
                 }
-                
-                const carrito = {
-                    0: { idProducto: "empty" },
-                }
-
+        
                 // Create Firebase account
                 axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC6DdMR99w1znVUnEFg7WH9kxYYVyQHERw", authData)
                     .then((res) => {
@@ -63,15 +59,6 @@ function Signup() {
                             }).catch((error) => {
 
                             })
-
-                        // Create carrito for the user
-                        axios.patch('https://climbcrafters-default-rtdb.europe-west1.firebasedatabase.app/users/' + email.split('.').join("") + '/carrito.json', carrito)
-                            .then((response) => {
-
-                            }).catch((error) => {
-
-                            })
-
                         navigate('/products')
 
                     }).catch((err) => {
